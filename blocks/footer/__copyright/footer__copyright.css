@@ -1,0 +1,17 @@
+.footer__copyright {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  margin: 0px 0px 0px 0px;
+  padding: 16px 0px 0px 0px;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: 768px) {
+    /* стили для планшета */
+  .footer__copyright {
+    line-height: 16px;
+    padding: 0px 0px 0px 0px;
+  }  
+}

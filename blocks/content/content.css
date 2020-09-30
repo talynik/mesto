@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-width: 320px;
+  margin: 0px auto 0px auto;
+  background: #2A2C2F;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: 768px) {
+    /* стили для планшета */
+  .content {
+    max-width: 768px;
+  }  
+}
+
+@media screen and (min-width: 1024px) {
+  .content {
+    max-width: 1024px;
+  } 
+}
+
+@media screen and (min-width: 1280px) {
+    /* стили для больших настольных компьютеров и ноутбуков */
+  .content {
+    max-width: 1280px;
+  } 
+}

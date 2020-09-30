@@ -1,0 +1,15 @@
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  list-style: none;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: 768px) {
+    /* стили для планшета */
+  .footer__links {
+    flex-direction: row;
+  }  
+}

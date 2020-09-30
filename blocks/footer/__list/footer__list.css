@@ -1,0 +1,11 @@
+.footer__list {
+  margin: 0px 0px 32px 0px;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: 768px) {
+    /* стили для планшета */
+  .footer__list {
+    margin: 0px 18px 0px 0px;
+  }  
+}
