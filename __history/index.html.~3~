@@ -10,8 +10,7 @@
   <div class="content">
     
     <header class="header">
-      <img class="header__logo" src="./images/header-logo.jpg" alt="Логотип">
-      <div class="header__line"></div>
+      <img class="header__logo" src="./images/header-logo.svg" alt="Логотип">
     </header>
     
     <main>

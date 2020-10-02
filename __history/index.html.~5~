@@ -9,9 +9,8 @@
 <body class="root">
   <div class="content">
     
-    <header class="header">
+    <header class="header header__line">
       <img class="header__logo" src="./images/header-logo.jpg" alt="Логотип">
-      <div class="header__line"></div>
     </header>
     
     <main>
