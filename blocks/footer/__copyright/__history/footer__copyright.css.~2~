@@ -11,8 +11,8 @@
 /* Основной код для разрешения 320px */
 @media screen and (min-width: 768px) {
     /* стили для планшета */
- /*  .footer__copyright {
+  .footer__copyright {
     line-height: 16px;
     padding: 0px 0px 0px 0px;
-  }   */
+  }  
 }

@@ -19,10 +19,6 @@
    <section class="profile">
         <img class="avatar" src="./images/profile-avatar.jpg" alt="Аватар">
    </section>
-   
-   <section class="elements">
-        <img class="avatar" src="./images/profile-avatar.jpg" alt="Аватар">
-   </section>
     
     </main>
     
