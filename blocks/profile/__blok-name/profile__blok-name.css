@@ -1,0 +1,6 @@
+.profile__blok-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}

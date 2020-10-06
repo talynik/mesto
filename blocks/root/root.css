@@ -1,8 +1,7 @@
 .root {
   margin: 0px auto 0px auto;
-  background: #2A2C2F;
+  background: #000000;
   font-family: Inter, 'Arial', sans-serif;
-  color: #FFFFFF;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;

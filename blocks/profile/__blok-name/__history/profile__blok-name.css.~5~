@@ -1,0 +1,4 @@
+.profile__blok-name {
+  display: flex;
+  flex-direction: row;
+}
