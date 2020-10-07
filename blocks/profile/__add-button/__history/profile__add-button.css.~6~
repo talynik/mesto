@@ -9,12 +9,3 @@
   color: white;
   cursor: pointer;
 }
-
-
-@media screen and (min-width: calc(282px * 3 + 18px * 2)) {
-      /* При ширине в три карточки */
-  .profile__add-button {
-    width: 150px;
-    height: 50px;
-  }
-}

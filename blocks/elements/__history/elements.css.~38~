@@ -4,8 +4,9 @@
 }
 
 @media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+    /* стили для больших настольных компьютеров и ноутбуков */
   .elements {
+    max-width: 1280px;
     padding: 50px 0px 66px 0px;
   }
 }

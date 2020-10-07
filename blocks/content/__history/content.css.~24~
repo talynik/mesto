@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  margin: 0px auto 0px auto;
+}
+
+/* Основной код для разрешения 320px */
+ @media screen and (min-width: 768px) {
+    /* стили для планшета */
+  .content {
+    max-width: calc(282px * 2 + 18px);
+    padding: 0px 93px 0px 93px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .content {
+    max-width: 1024px;
+    padding: 0px 71px 0px 71px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+    /* стили для больших настольных компьютеров и ноутбуков */
+  .content {
+    max-width: 1280px;
+    padding: 0px 199px 0px 199px;
+  }
+}

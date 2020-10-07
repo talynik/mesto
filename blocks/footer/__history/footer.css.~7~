@@ -4,8 +4,7 @@
 }
 
 /* Основной код для разрешения 320px */
-@media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+@media screen and (min-width: 768px) {
   .footer {
     padding: 0px 0px 60px 0px;
   }

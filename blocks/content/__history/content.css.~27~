@@ -13,9 +13,9 @@
   }
 }
 
-@media screen and (min-width: calc(282px * 3 + 18px * 2)) {
+@media screen and (min-width: calc(282px * 3 + 18px)) {
       /* При ширине в три карточки */
   .content {
-    max-width: calc(282px * 3 + 18px * 2); /* Ширина трёх карточек */
+    max-width: calc(282px * 3 + 18px); /* Ширина трёх карточек */
   }
 }

@@ -1,0 +1,12 @@
+.profile__personality {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (min-width: calc(282px * 3 + 18px * 2)) {
+      /* При ширине в три карточки */
+  .profile__personality {
+    flex-direction: row;
+  }
+}

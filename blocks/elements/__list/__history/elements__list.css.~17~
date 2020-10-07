@@ -12,8 +12,8 @@
 
 
 /* Основной код для разрешения 320px */
- @media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+ @media screen and (min-width: 768px) {
+    /* стили для планшета */
   .elements__list {
     grid-gap: 21px 18px;
   }

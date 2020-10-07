@@ -17,7 +17,7 @@
     <main>
     
       <section class="profile">
-        <div class="profile__personality">
+        <div >
           <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Аватар">
           <div class="profile__info">
             <div class="profile__blok-name">

@@ -12,10 +12,12 @@
   }
 }
 
+
 @media screen and (min-width: calc(282px * 3 + 18px * 2)) {
       /* При ширине в три карточки */
   .profile {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 }

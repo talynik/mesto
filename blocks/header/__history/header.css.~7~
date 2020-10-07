@@ -5,8 +5,7 @@
 }
 
 /* Основной код для разрешения 320px */
-@media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+@media screen and (min-width: 768px) {
   .header {
     padding: 45px 0px 40px 0px;
   }

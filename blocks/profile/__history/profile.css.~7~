@@ -1,0 +1,13 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 19px 0px 19px;
+}
+
+@media screen and (min-width: calc(282px * 2 + 18px)) {
+    /* стили для больших настольных компьютеров и ноутбуков */
+  .profile {
+    padding: 0px 0px 0px 0px;
+  }
+}

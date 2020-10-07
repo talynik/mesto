@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  padding: 0px 19px 36px 19px;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: 768px) {
+    /* стили для планшета */
+ /*  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 88px 24px 24px 24px;
+  }   */
+}
+
+@media screen and (min-width: 1024px) {
+  /* .footer {
+    padding: 92px 48px 24px 48px;
+  }  */
+}
+
+
+@media screen and (min-width: 1280px) {
+    /* стили для больших настольных компьютеров и ноутбуков */
+  .footer {
+    padding: 0px 0px 36px 0px;
+  }
+}
