@@ -1,0 +1,7 @@
+.popap__submit-button {
+  width: 238px;
+  height: 46px;
+  background: #000000;
+  border-radius: 2px;
+  color: #ffffff;
+}

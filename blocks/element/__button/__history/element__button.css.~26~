@@ -1,7 +1,0 @@
-.element__button {
-  padding: 0px;
-  box-sizing: border-box;
-  background-color: transparent;
-  border: 1px solid #FFFFFF;
-  z-index: 0;
-}

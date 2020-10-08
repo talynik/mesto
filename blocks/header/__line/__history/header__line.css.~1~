@@ -1,1 +1,0 @@
-.header__langs {  display: flex;  align-items: center;  justify-content: flex-end;  margin: 0px 0px 0px 0px;  padding: 0px 0px 0px 0px;  list-style: none;}

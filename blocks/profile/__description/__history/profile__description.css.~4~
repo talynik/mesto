@@ -1,8 +1,0 @@
-.profile__description {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  margin: 0px;
-}

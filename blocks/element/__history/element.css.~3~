@@ -1,5 +1,0 @@
-.element {
-  justify-items: center;
-  background: #FFFFFF;
-  border-radius: 10px;
-}

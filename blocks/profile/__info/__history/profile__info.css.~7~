@@ -1,4 +1,0 @@
-.profile__info {
-  min-height: 66px;
-  padding: 14px auto 36px auto;
-}

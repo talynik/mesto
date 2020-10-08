@@ -1,0 +1,3 @@
+.popap__is-opened {
+  display: flex;
+}

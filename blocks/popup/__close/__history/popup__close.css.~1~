@@ -1,0 +1,21 @@
+.popup__close {
+  align-self: flex-end;
+  width: 26px;
+  height: 26px;
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid #000000;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  cursor: pointer;
+}
+
+/* Основной код для разрешения 320px */
+ @media screen and (min-width: calc(282px * 2 + 18px)) {
+      /* При ширине в две карточки */
+  .popap__close {
+    width: 40.7px;
+    height: 40.7px;
+  }
+}

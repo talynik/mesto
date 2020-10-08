@@ -1,0 +1,8 @@
+.popap__close-icon {
+  width: 100%;
+  cursor: pointer;
+}
+
+.popap__close-icon:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,9 @@
+.popap__title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 25px 0px 75px 0px;
+  text-align: center;
+  color: #000000;
+}
