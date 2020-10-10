@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0px 42px 0px;
+  border-bottom: 1px solid #545454;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: calc(282px * 2 + 18px)) {
+      /* При ширине в две карточки */
+  .header {
+    padding: 45px 0px 40px 0px;
+  }
+}

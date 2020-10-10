@@ -3,9 +3,11 @@
   padding: 0px 0px 31.6px 27px;
 }
 
-@media screen and (min-width: 768px) {
-    /* стили для малого смартфона */
- /*  .header__logo {
-    width: 176px; */
+/* Основной код для разрешения 320px */
+ @media screen and (min-width: calc(282px * 2 + 18px)) {
+      /* При ширине в две карточки */
+  .header__logo {
+    width: 142.01px;
+    padding: 0px 0px 40.6px 0px;
   }
 }

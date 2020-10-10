@@ -13,7 +13,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  color: #000000;
+  color: #bcbcc4;
 }
 
 .popup__input::-webkit-input-placeholder {
@@ -21,7 +21,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  color: #000000;
+  color: #bcbcc4;
 }
 
 .popup__input::-moz-placeholder {
@@ -29,7 +29,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  color: #000000;
+  color: #bcbcc4;
 }
 
 .popup__input::-ms-input-placeholder {
@@ -37,4 +37,5 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  color: #000000;
+  color: #bcbcc4;
+}

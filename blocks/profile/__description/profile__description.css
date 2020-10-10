@@ -17,5 +17,8 @@
       /* При ширине в две карточки */
   .profile__description {
     max-width: 480px;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
   }
 }

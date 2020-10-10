@@ -1,0 +1,14 @@
+.element__button {
+  padding: 0px;
+  height: 20px;
+  width: 23px;
+  box-sizing: border-box;
+  background-color: transparent;
+  background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #FFFFFF;
+  margin: 0px 6px 0px 22px;
+  cursor: pointer;
+  background-size: contain;
+}
