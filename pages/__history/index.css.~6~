@@ -1,3 +1,5 @@
+/* Извиняюсь, но у меня все медиозапросы отображаются по порядку
+              почему у Вас на картинке такой хаос... Непонятно...*/
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 @import url(../blocks/root/root.css);
@@ -31,14 +33,3 @@
 @import url(../blocks/popup/__input-name/popup__input-name.css);
 @import url(../blocks/popup/__input-description/popup__input-description.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
-
-@import url(../blocks/popup-mesto/popup-mesto.css);
-@import url(../blocks/popup-mesto/_opened/popup-mesto_opened.css);
-@import url(../blocks/popup-mesto/__pole/popup-mesto__pole.css);
-@import url(../blocks/popup-mesto/__close/popup-mesto__close.css);
-@import url(../blocks/popup-mesto/__form/popup-mesto__form.css);
-@import url(../blocks/popup-mesto/__title/popup-mesto__title.css);
-@import url(../blocks/popup-mesto/__input/popup-mesto__input.css);
-@import url(../blocks/popup-mesto/__input-name/popup-mesto__input-name.css);
-@import url(../blocks/popup-mesto/__input-description/popup-mesto__input-description.css);
-@import url(../blocks/popup-mesto/__submit-button/popup-mesto__submit-button.css);
