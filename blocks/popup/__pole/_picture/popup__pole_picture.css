@@ -1,0 +1,17 @@
+.popup__pole_picture {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 100px;
+  left: calc(15vw / 2);
+  padding: 0px 0px 0px 0px;
+  z-index: 1;
+}
+
+/* Основной код для разрешения 320px */
+@media screen and (min-width: calc(282px * 3 + 18px * 2)) {
+  /* При ширине в три карточки */
+  popup__pole_picture {
+    top: 41px;
+  }
+}

@@ -4,5 +4,14 @@
   font-size: 18px;
   line-height: 22px;
   margin: 25px 0px 75px 0px;
-  text-align: center;
+}
+
+/* Основной код для разрешения 320px */
+ @media screen and (min-width: calc(282px * 2 + 18px)) {
+      /* При ширине в две карточки */
+  .popup__title {
+    font-size: 24px;
+    line-height: 29px;
+    margin: 34px 0px 54px 0px;
+  }
 }

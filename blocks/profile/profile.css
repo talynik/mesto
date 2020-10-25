@@ -5,15 +5,16 @@
   padding: 42px 19px 0px 19px;
 }
 
+/* РћСЃРЅРѕРІРЅРѕР№ РєРѕРґ РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ 320px */
 @media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+      /* РџСЂРё С€РёСЂРёРЅРµ РІ РґРІРµ РєР°СЂС‚РѕС‡РєРё */
   .profile {
     padding: 40px 0px 0px 0px;
   }
 }
 
 @media screen and (min-width: calc(282px * 3 + 18px * 2)) {
-      /* При ширине в три карточки */
+      /* РџСЂРё С€РёСЂРёРЅРµ РІ С‚СЂРё РєР°СЂС‚РѕС‡РєРё */
   .profile {
     flex-direction: row;
     justify-content: space-between;

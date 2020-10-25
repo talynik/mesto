@@ -1,7 +1,7 @@
 .popup__close {
   align-self: flex-end;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   transform: rotate(-45deg);
   box-sizing: border-box;
   background-color: transparent;
@@ -9,7 +9,7 @@
   background-repeat: no-repeat;
   background-position: center;
   border: 1px solid #000000;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 6.57px 0px 0px;
   padding: 0px 0px 0px 0px;
   cursor: pointer;
 }
@@ -18,9 +18,9 @@
   opacity: 0.6;
 }
 
-/* Основной код для разрешения 320px */
+/* РћСЃРЅРѕРІРЅРѕР№ РєРѕРґ РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ 320px */
  @media screen and (min-width: calc(282px * 2 + 18px)) {
-      /* При ширине в две карточки */
+      /* РџСЂРё С€РёСЂРёРЅРµ РІ РґРІРµ РєР°СЂС‚РѕС‡РєРё */
   .popup__close {
     width: 40.7px;
     height: 40.7px;

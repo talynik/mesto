@@ -4,8 +4,9 @@
   align-items: center;
 }
 
+/* Основной код для разрешения 320px */
 @media screen and (min-width: calc(282px * 3 + 18px * 2)) {
-      /* ��� ������ � ��� �������� */
+      /* При ширине в три карточки */
   .profile__personality {
     flex-direction: row;
   }
