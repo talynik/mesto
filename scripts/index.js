@@ -1,3 +1,4 @@
+const popup = document.querySelector(".popup");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const buttonOpenPopup = document.querySelector(".profile__edit-button");
@@ -52,14 +53,27 @@ const initialCards = [
 ];
 
 //функция открытия и закрытия попапов
-const popupToggle = (popup) => {
-  popup.classList.toggle("popup_opened");
+const popupToggle = (form) => {
+  form.classList.toggle("popup_opened");
+}
+
+
+const closePopupEscape = (formEscape) => {
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === "Escape") 
+      {popupToggle(formEscape)};
+  });
+  document.removeEventListener('keydown', (evt) => {
+    if(evt.key === "Escape") 
+      {popupToggle(formEscape)};
+  });
 }
 
 //обработка события открытие попа изменения профиля
 buttonOpenPopup.addEventListener("click", () => {
   popupToggle(popupProfile);
-  popupContentProfile()
+  popupContentProfile();
+  closePopupEscape(popupProfile)
 });
 
 //функция изменения данных профиля

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
   <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </head>
 <body class="root">
   <div class="content">
@@ -47,9 +48,11 @@
         <button class="popup__close popup__close_profile" type="button" aria-label="Закрыть"></button>
         <form class="popup__form popup__form_profile">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" id="name" name="name" class="popup__input" placeholder="Имя и фамилия" required>
-          <input type="text" id="description" name="description" class="popup__input" placeholder="Специализация" required>
-          <button class="popup__submit-button popup__submit-button_profile" type="submit" aria-label="Сохранить">Сохранить</button>
+          <input  autocomplete="off" type="text" id="name" name="name" class="popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="40" required>
+          <span id="name-error" class="popup__error_visible"></span>
+          <input  autocomplete="off" type="text" id="description" name="description" class="popup__input" placeholder="Специализация" minlength="2" maxlength="200" required>
+          <span id="description-error" class="popup__error_visible"></span>
+          <button class="popup__button popup__button_profile" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
     </section>
@@ -59,9 +62,11 @@
         <button class="popup__close popup__close_mesto" type="button" aria-label="Закрыть"></button>
         <form class="popup__form popup__form_mesto">
           <h2 class="popup__title">Новое место</h2>
-          <input type="text" id="name-mesto" name="mesto-name" class="popup__input" placeholder="Название" required>
-          <input type="text" id="url-mesto" name="mesto-url" class="popup__input" placeholder="Ссылка на картинку" required>
-          <button class="popup__submit-button popup__submit-button_mesto" type="submit" aria-label="Сохранить">Сохранить</button>
+          <input  autocomplete="off" type="text" id="name-mesto" name="mesto-name" class="popup__input" placeholder="Название" minlength="2" maxlength="30" required>
+          <span id="name-mesto-error" class="popup__error_visible"></span>
+          <input  autocomplete="off" type="url" id="url-mesto" name="mesto-url" class="popup__input" placeholder="Ссылка на картинку" required>
+          <span id="url-mesto-error" class="popup__error_visible"></span>
+          <button class="popup__button popup__button_mesto" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
     </section>
