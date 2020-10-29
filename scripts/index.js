@@ -1,4 +1,3 @@
-const popup = document.querySelector(".popup");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const buttonOpenPopup = document.querySelector(".profile__edit-button");
@@ -18,6 +17,7 @@ const inoutMestoLink = document.querySelector("#url-mesto");
 
 const popupPicture = document.querySelector(".popup_picture");
 const popupClosePicture = document.querySelector(".popup__close_picture");
+const popupPolePicture = document.querySelector(".popup__pole_picture");
 const popupImagePicture = document.querySelector(".popup__image_picture");
 const popupNamePicture = document.querySelector(".popup__name_picture");
 
@@ -57,15 +57,21 @@ const popupToggle = (form) => {
   form.classList.toggle("popup_opened");
 }
 
+// функция закрытия попапов кликом на оверлей
+const closePopapOverley = (formOverley) => {
+  formOverley.addEventListener("click", (event) => {
+    if (event.target === event.currentTarget) {
+      formOverley.classList.remove("popup_opened");
+    }
+  });
+}
 
+// функция закрытия попапов по нажатию на Escape
 const closePopupEscape = (formEscape) => {
   document.addEventListener('keydown', (evt) => {
-    if(evt.key === "Escape") 
-      {popupToggle(formEscape)};
-  });
-  document.removeEventListener('keydown', (evt) => {
-    if(evt.key === "Escape") 
-      {popupToggle(formEscape)};
+    if(evt.key === "Escape") {
+      formEscape.classList.remove("popup_opened");
+    }
   });
 }
 
@@ -73,7 +79,8 @@ const closePopupEscape = (formEscape) => {
 buttonOpenPopup.addEventListener("click", () => {
   popupToggle(popupProfile);
   popupContentProfile();
-  closePopupEscape(popupProfile)
+  closePopupEscape(popupProfile);
+  closePopapOverley(popupProfile);
 });
 
 //функция изменения данных профиля
@@ -95,7 +102,11 @@ const popupContentProfile = () => {
 buttonCloseProfile.addEventListener("click", () => {popupToggle(popupProfile)});
 
 // обработчик открытия попапа добавления места
-buttonAdd.addEventListener("click", () => {popupToggle(popupMesto)});
+buttonAdd.addEventListener("click", () => {
+  popupToggle(popupMesto);
+  closePopupEscape(popupMesto);
+  closePopapOverley(popupMesto);
+});
 
 // обработчик закрытия попапа нового места
 buttonCloseMesto.addEventListener("click", () => {popupToggle(popupMesto)});
@@ -145,12 +156,24 @@ const addElementMesto = (elementDetails) => {
   return elementMesto;
 };
 
+// функция закрытия попапа с картинкой при клике на поле сбоку
+const closePopapPictureOverley = (formPictureOverley) => {
+  formPictureOverley.addEventListener("click", (event) => {
+    if (event.target === event.currentTarget) {
+      popupPicture.classList.remove("popup_opened");
+    }
+  });
+}
+
 //формирование данных открытия попапа для изображения
 const handleImagePreview = (details) => {
   popupImagePicture.src = details.link;
   popupImagePicture.alt = `Изображение ${details.name}`;
   popupNamePicture.textContent = details.name;
   popupToggle(popupPicture);
+  closePopupEscape(popupPicture);
+  closePopapOverley(popupPicture);
+  closePopapPictureOverley(popupPolePicture);
 }
 
 //закрытие попапа с изображением
