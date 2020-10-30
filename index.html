@@ -45,7 +45,7 @@
     
     <section class="popup popup_profile">
       <div class="popup__pole">
-        <button class="popup__close popup__close_profile" type="button" aria-label="Закрыть"></button>
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form class="popup__form popup__form_profile">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input  autocomplete="off" type="text" id="name" name="name" class="popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="40" required>
@@ -58,8 +58,8 @@
     </section>
 
     <section class="popup popup_mesto">
-      <div class="popup__pole popup__pole_mesto">
-        <button class="popup__close popup__close_mesto" type="button" aria-label="Закрыть"></button>
+      <div class="popup__pole">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
         <form class="popup__form popup__form_mesto">
           <h2 class="popup__title">Новое место</h2>
           <input  autocomplete="off" type="text" id="name-mesto" name="mesto-name" class="popup__input" placeholder="Название" minlength="2" maxlength="30" required>
@@ -72,9 +72,9 @@
     </section>
     
     <section class="popup popup_picture">
-      <div class="popup__pole_picture">
+      <div class="popup__pole popup__pole_picture">
         <form class="popup__form_picture">
-          <button class="popup__close popup__close_picture" type="button" aria-label="Закрыть"></button>
+          <button class="popup__close" type="button" aria-label="Закрыть"></button>
           <img class="popup__image_picture" src="" alt="">
           <p class="popup__name_picture"></p>
         </form>

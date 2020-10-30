@@ -1,23 +1,19 @@
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const buttonOpenPopup = document.querySelector(".profile__edit-button");
-const buttonAdd = document.querySelector(".profile__add-button");
+const profilePopupOpenButton = document.querySelector(".profile__edit-button");
+const addPlaceButton  = document.querySelector(".profile__add-button");
 
-const popupProfile = document.querySelector(".popup_profile")
-const popupFormProfile = document.querySelector(".popup__form_profile");
-const buttonCloseProfile = document.querySelector(".popup__close_profile");
-const inputProfileName = document.querySelector("#name");
-const inoutProfileDescription = document.querySelector("#description");
+const profilePopup = document.querySelector(".popup_profile")
+const profilePopupForm = document.querySelector(".popup__form_profile");
+const profileNameInput = document.querySelector("#name");
+const profileDescriptionInput = document.querySelector("#description");
 
-const popupMesto = document.querySelector(".popup_mesto")
-const popupFormMesto = document.querySelector(".popup__form_mesto");
-const buttonCloseMesto = document.querySelector(".popup__close_mesto");
-const inputMestoName = document.querySelector("#name-mesto");
-const inoutMestoLink = document.querySelector("#url-mesto");
+const addCardPopup = document.querySelector(".popup_mesto")
+const placePopupForm = document.querySelector(".popup__form_mesto");
+const placePopupNameInput = document.querySelector("#name-mesto");
+const placePopupLinkInput = document.querySelector("#url-mesto");
 
-const popupPicture = document.querySelector(".popup_picture");
-const popupClosePicture = document.querySelector(".popup__close_picture");
-const popupPolePicture = document.querySelector(".popup__pole_picture");
+const picturePopup = document.querySelector(".popup_picture");
 const popupImagePicture = document.querySelector(".popup__image_picture");
 const popupNamePicture = document.querySelector(".popup__name_picture");
 
@@ -52,19 +48,37 @@ const initialCards = [
   }
 ];
 
-//функция открытия и закрытия попапов
-const popupToggle = (form) => {
-  form.classList.toggle("popup_opened");
-}
-
-// функция закрытия попапов кликом на оверлей
-const closePopapOverley = (formOverley) => {
-  formOverley.addEventListener("click", (event) => {
-    if (event.target === event.currentTarget) {
-      formOverley.classList.remove("popup_opened");
+//функция открытия попапов
+const openPopup = (popup) => {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === "Escape") {
+      closePopup(popup);
     }
   });
 }
+
+//функция закрытия попапов
+const closePopup = (popup) => {
+  popup.classList.remove("popup_opened");
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+}
+
+//функция регистрации нажатия на оверлей или крестик
+const handleOverlayAndCloseButtonClick = (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+    closePopup(evt.target.closest('section'));
+  }
+}
+
+// слушатели попапов
+profilePopup.addEventListener('click', handleOverlayAndCloseButtonClick);
+addCardPopup.addEventListener('click', handleOverlayAndCloseButtonClick);
+picturePopup.addEventListener('click', handleOverlayAndCloseButtonClick);
 
 // функция закрытия попапов по нажатию на Escape
 const closePopupEscape = (formEscape) => {
@@ -76,56 +90,46 @@ const closePopupEscape = (formEscape) => {
 }
 
 //обработка события открытие попа изменения профиля
-buttonOpenPopup.addEventListener("click", () => {
-  popupToggle(popupProfile);
+profilePopupOpenButton.addEventListener("click", () => {
+  openPopup(profilePopup);
   popupContentProfile();
-  closePopupEscape(popupProfile);
-  closePopapOverley(popupProfile);
 });
 
 //функция изменения данных профиля
 const popupTextContent = (event) => {
   event.preventDefault();
-  profileName.textContent = inputProfileName.value;
-  profileDescription.textContent = inoutProfileDescription.value;
-  popupToggle(popupProfile);
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closePopup(profilePopup);
 }
 
 //задание начальных значений в попапе профиля
 const popupContentProfile = () => {
-  inputProfileName.value = profileName.textContent;
-  inoutProfileDescription.value = profileDescription.textContent;
-  popupFormProfile.addEventListener("submit", popupTextContent);
+  profileNameInput.value = profileName.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+  profilePopupForm.addEventListener("submit", popupTextContent);
 }
 
-// обработчик закрытия попапа профиля
-buttonCloseProfile.addEventListener("click", () => {popupToggle(popupProfile)});
-
 // обработчик открытия попапа добавления места
-buttonAdd.addEventListener("click", () => {
-  popupToggle(popupMesto);
-  closePopupEscape(popupMesto);
-  closePopapOverley(popupMesto);
+addPlaceButton .addEventListener("click", () => {
+  openPopup(addCardPopup);
 });
-
-// обработчик закрытия попапа нового места
-buttonCloseMesto.addEventListener("click", () => {popupToggle(popupMesto)});
 
 // функция передачи данных для нового места
 const popupContentMesto = (event) => {
   event.preventDefault();
 
   const mestoItem = addElementMesto({
-    name: inputMestoName.value,
-    link: inoutMestoLink.value
+    name: placePopupNameInput.value,
+    link: placePopupLinkInput.value
   });
 
   elementsList.prepend(mestoItem);
-  popupToggle(popupMesto);
+  closePopup(addCardPopup);
 };
 
 // обработчик события добавления нового места
-popupFormMesto.addEventListener("submit", popupContentMesto);
+placePopupForm.addEventListener("submit", popupContentMesto);
 
 // функция добавления карточек
 // elementDetails -> {link: '', name: ''}
@@ -156,28 +160,13 @@ const addElementMesto = (elementDetails) => {
   return elementMesto;
 };
 
-// функция закрытия попапа с картинкой при клике на поле сбоку
-const closePopapPictureOverley = (formPictureOverley) => {
-  formPictureOverley.addEventListener("click", (event) => {
-    if (event.target === event.currentTarget) {
-      popupPicture.classList.remove("popup_opened");
-    }
-  });
-}
-
 //формирование данных открытия попапа для изображения
 const handleImagePreview = (details) => {
   popupImagePicture.src = details.link;
   popupImagePicture.alt = `Изображение ${details.name}`;
   popupNamePicture.textContent = details.name;
-  popupToggle(popupPicture);
-  closePopupEscape(popupPicture);
-  closePopapOverley(popupPicture);
-  closePopapPictureOverley(popupPolePicture);
+  openPopup(picturePopup);
 }
-
-//закрытие попапа с изображением
-popupClosePicture.addEventListener("click", () => {popupToggle(popupPicture)});
 
 //перебор данных из массива для добавления карточек
 initialCards.forEach((data) => {
