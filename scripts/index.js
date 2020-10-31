@@ -51,21 +51,21 @@ const initialCards = [
 //функция открытия попапов
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === "Escape") {
-      closePopup(popup);
-    }
-  });
+  document.addEventListener('keydown', closeByEscape);
+}
+
+// 
+const closeByEscape = (evt) => {
+  const openedPopup = document.querySelector(".popup_opened");
+  if(evt.key === "Escape") {
+    closePopup(openedPopup);
+  }
 }
 
 //функция закрытия попапов
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === "Escape") {
-      closePopup(popup);
-    }
-  });
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 //функция регистрации нажатия на оверлей или крестик
@@ -107,7 +107,6 @@ const popupTextContent = (event) => {
 const popupContentProfile = () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profilePopupForm.addEventListener("submit", popupTextContent);
 }
 
 // обработчик открытия попапа добавления места
@@ -130,6 +129,8 @@ const popupContentMesto = (event) => {
 
 // обработчик события добавления нового места
 placePopupForm.addEventListener("submit", popupContentMesto);
+// обработчик события изменения профиля
+profilePopupForm.addEventListener("submit", popupTextContent);
 
 // функция добавления карточек
 // elementDetails -> {link: '', name: ''}
