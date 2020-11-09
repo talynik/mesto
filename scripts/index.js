@@ -80,15 +80,6 @@ profilePopup.addEventListener('click', handleOverlayAndCloseButtonClick);
 addCardPopup.addEventListener('click', handleOverlayAndCloseButtonClick);
 picturePopup.addEventListener('click', handleOverlayAndCloseButtonClick);
 
-// функция закрытия попапов по нажатию на Escape
-const closePopupEscape = (formEscape) => {
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === "Escape") {
-      formEscape.classList.remove("popup_opened");
-    }
-  });
-}
-
 //обработка события открытие попа изменения профиля
 profilePopupOpenButton.addEventListener("click", () => {
   openPopup(profilePopup);
