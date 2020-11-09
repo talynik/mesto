@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js"
+
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profilePopupOpenButton = document.querySelector(".profile__edit-button");
@@ -14,11 +17,8 @@ const placePopupNameInput = document.querySelector("#name-mesto");
 const placePopupLinkInput = document.querySelector("#url-mesto");
 
 const picturePopup = document.querySelector(".popup_picture");
-const popupImagePicture = document.querySelector(".popup__image_picture");
-const popupNamePicture = document.querySelector(".popup__name_picture");
 
 const elementsList = document.querySelector(".elements__list");
-const elementTemplate = document.querySelector('#element-template');
 
 //массив первоначальных данных
 const initialCards = [
@@ -118,12 +118,12 @@ addPlaceButton .addEventListener("click", () => {
 const popupContentMesto = (event) => {
   event.preventDefault();
 
-  const mestoItem = addElementMesto({
+  const mestoItem = new Card({
     name: placePopupNameInput.value,
     link: placePopupLinkInput.value
   });
-
-  elementsList.prepend(mestoItem);
+  const newElement = mestoItem.generateCard();
+  elementsList.prepend(newElement);
   closePopup(addCardPopup);
 };
 
@@ -132,45 +132,13 @@ placePopupForm.addEventListener("submit", popupContentMesto);
 // обработчик события изменения профиля
 profilePopupForm.addEventListener("submit", popupTextContent);
 
-// функция добавления карточек
-// elementDetails -> {link: '', name: ''}
-const addElementMesto = (elementDetails) => {
-  const elementMesto = elementTemplate.cloneNode(true).content;
-
-  const elementName = elementMesto.querySelector(".element__name");
-  const elementImage = elementMesto.querySelector(".element__image");
-
-  elementImage.addEventListener("click", () => handleImagePreview(elementDetails));
-
-  elementName.textContent = elementDetails.name;
-  elementImage.src = elementDetails.link;
-  elementImage.alt = elementDetails.name;
-
-  //реализация добавления лайков
-  elementMesto.querySelector('.element__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active');
-  });
-
-  //реализация удаления карточек
-  const deleteButton = elementMesto.querySelector('.element__button-delete');
-  deleteButton.addEventListener('click', function () {
-    const listElement = deleteButton.closest('.element');
-    listElement.remove();
-  });
-
-  return elementMesto;
-};
-
-//формирование данных открытия попапа для изображения
-const handleImagePreview = (details) => {
-  popupImagePicture.src = details.link;
-  popupImagePicture.alt = `Изображение ${details.name}`;
-  popupNamePicture.textContent = details.name;
-  openPopup(picturePopup);
-}
-
 //перебор данных из массива для добавления карточек
-initialCards.forEach((data) => {
-  const elementMesto = addElementMesto(data);
-  elementsList.append(elementMesto);
+initialCards.forEach((item) => {
+  const card = new Card(item, openPopup);
+  const cardElement = card.generateCard();
+  elementsList.append(cardElement);
 });
+
+//запуск проверки валидации
+const formValidator = new FormValidator;
+formValidator.enableValidation();
