@@ -12,36 +12,3 @@
   line-height: 17px;
   color: #000000;
 }
-
-/* адаптация плейсхолдеров*/
-.popup__input::placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #bcbcc4;
-}
-
-.popup__input::-webkit-input-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #bcbcc4;
-}
-
-.popup__input::-moz-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #bcbcc4;
-}
-
-.popup__input::-ms-input-placeholder {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  color: #bcbcc4;
-}

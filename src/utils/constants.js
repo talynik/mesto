@@ -7,6 +7,7 @@ export const profileDescriptionInput = document.querySelector("#description");
 export const placePopupNameInput = document.querySelector("#name-mesto");
 export const placePopupLinkInput = document.querySelector("#url-mesto");
 export const elementsList = document.querySelector(".elements__list");
+
 //массив первоначальных данных
 export const initialCards = [
   {

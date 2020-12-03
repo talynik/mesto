@@ -11,11 +11,12 @@ import {
   addPlaceButton,
   initialCards,
   elementsList
-} from "../utils/constants.js"
+} from "../utils/constants.js";
 
+import '../pages/index.css';
 
 const profile = new PopupWithForm(".popup_profile", {
-  handleFormSubmit: (formData) => {
+  handleFormSubmit: function(formData) {
     const newUser = new UserInfo(formData);
     newUser.setUserInfo();
   }
@@ -24,7 +25,7 @@ const profile = new PopupWithForm(".popup_profile", {
 profile.setEventListeners();
 
 //обработка события открытие попа изменения профиля
-profilePopupOpenButton.addEventListener("click", () => {
+profilePopupOpenButton.addEventListener("click", function() {
   const userInfo = new UserInfo({
     profileName: profileName.textContent,
     profileDescription: profileDescription.textContent
@@ -38,9 +39,9 @@ profilePopupOpenButton.addEventListener("click", () => {
 });
 
 const addCard = new PopupWithForm(".popup_mesto", {
-  handleFormSubmit: (formData) => {
+  handleFormSubmit: function(formData) {
     const card = new Card(formData, {
-      handleCardClick: (name, link) => {
+      handleCardClick: function(name, link) {
         const openPopupPicture = new PopupWithImage(".popup_picture", {name, link});
         openPopupPicture.open();
       }
@@ -53,7 +54,7 @@ const addCard = new PopupWithForm(".popup_mesto", {
 addCard.setEventListeners();
 
 // обработчик открытия попапа добавления места
-addPlaceButton.addEventListener("click", () => {
+addPlaceButton.addEventListener("click", function() {
 
   const formValidator = new FormValidator(".popup_mesto");
   formValidator.enableValidation();
@@ -64,9 +65,9 @@ addPlaceButton.addEventListener("click", () => {
 //перебор данных из массива для добавления карточек
 const CardList = new Section({
   data: initialCards,
-  renderer: (item) => {
+  renderer: function(item) {
     const card = new Card(item, {
-      handleCardClick: (name, link) => {
+      handleCardClick: function(name, link) {
         const openPopupPicture = new PopupWithImage(".popup_picture", {name, link});
         openPopupPicture.open();
       }
