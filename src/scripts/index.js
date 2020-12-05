@@ -15,10 +15,13 @@ import {
 
 import '../pages/index.css';
 
+const userInfo = new UserInfo({profileName, profileDescription});
+
+userInfo.getUserInfo();
+
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData) {
-    const newUser = new UserInfo(formData);
-    newUser.setUserInfo();
+    newUser.setUserInfo(formData);
   }
 });
 
@@ -26,24 +29,18 @@ profile.setEventListeners();
 
 //обработка события открытие попа изменения профиля
 profilePopupOpenButton.addEventListener("click", function() {
-  const userInfo = new UserInfo({
-    profileName: profileName.textContent,
-    profileDescription: profileDescription.textContent
-  });
-  userInfo.getUserInfo();
-
-  const formValidator = new FormValidator(".popup_profile");
-  formValidator.enableValidation();
-
   profile.open();
 });
+
+const openPopupPicture = new PopupWithImage(".popup_picture");
+openPopupPicture.setEventListeners();
+
 
 const addCard = new PopupWithForm(".popup_mesto", {
   handleFormSubmit: function(formData) {
     const card = new Card(formData, {
       handleCardClick: function(name, link) {
-        const openPopupPicture = new PopupWithImage(".popup_picture", {name, link});
-        openPopupPicture.open();
+        openPopupPicture.open(name, link);
       }
     });
     const newElement = card.generateCard();
@@ -53,28 +50,26 @@ const addCard = new PopupWithForm(".popup_mesto", {
 
 addCard.setEventListeners();
 
-// обработчик открытия попапа добавления места
+// обработчик открытия попапа добавления карточки
 addPlaceButton.addEventListener("click", function() {
-
-  const formValidator = new FormValidator(".popup_mesto");
-  formValidator.enableValidation();
-
   addCard.open();
 });
 
 //перебор данных из массива для добавления карточек
-const CardList = new Section({
+const cardList = new Section({
   data: initialCards,
   renderer: function(item) {
     const card = new Card(item, {
       handleCardClick: function(name, link) {
-        const openPopupPicture = new PopupWithImage(".popup_picture", {name, link});
-        openPopupPicture.open();
+        openPopupPicture.open(name, link);
       }
     });
     const cardElement = card.generateCard();
-    CardList.addItem(cardElement);
+    cardList.addItem(cardElement);
   }
 }, elementsList);
 
-CardList.renderItems();
+cardList.renderItems();
+
+const formValidator = new FormValidator();
+formValidator.enableValidation();

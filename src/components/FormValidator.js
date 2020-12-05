@@ -1,7 +1,6 @@
 export default class FormValidator {
-  constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);
-    this._form = this._popup.querySelector('.popup__form');
+  constructor() {
+    this._form = document.querySelector('.popup__form');
     this._inputSelector = '.popup__input';
     this._submitButtonSelector = '.popup__button';
     this._inactiveButtonClass = 'popup__button_disabled';

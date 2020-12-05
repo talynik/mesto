@@ -16,8 +16,8 @@ export default class UserInfo {
     profileDescriptionInput.value = this._profileDescription;
   }
 
-  setUserInfo() {
-    profileName.textContent = this._profileName;
-    profileDescription.textContent = this._profileDescription;
+  setUserInfo(formData) {
+    profileName.textContent = formData.profileName;
+    profileDescription.textContent = formData.profileDescription;
   }
 }
