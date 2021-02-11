@@ -1,45 +1,46 @@
 export default class Card {
-  constructor(data, {handleCardClick}) {
+  constructor(data, templateCard, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
-    this._handleCardClick  = handleCardClick;
+    this._templateCard = templateCard;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    const elementMesto = document.querySelector('#element-template').cloneNode(true).content;
+    const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;
     return elementMesto;
   }
 
   generateCard() {
-    this._element = this._getTemplate();
+    this._card = this._getTemplate();
     this._likeEventListener();
     this._deleteEventListener();
     this._generatePopapImage();
 
-    this._picture = this._element.querySelector('.element__image');
+    this._picture = this._card.querySelector('.element__image');
     this._picture.src = this._link;
     this._picture.alt = this._name;
-    this._element.querySelector('.element__name').textContent = this._name;
+    this._card.querySelector('.element__name').textContent = this._name;
   
-    return this._element;
+    return this._card;
   }
 
   _likeEventListener() {
-    this._element.querySelector('.element__like').addEventListener('click', function (evt) {
-      evt.target.classList.toggle('element__like_active');
+    const like = this._card.querySelector('.element__like');
+    like.addEventListener('click', function () {
+      like.classList.toggle('element__like_active');
     });
   }
 
   _deleteEventListener() {
-    const deleteButton = this._element.querySelector('.element__button-delete');
+    const deleteButton = this._card.querySelector('.element__button-delete');
     deleteButton.addEventListener('click', function () {
-      const listElement = deleteButton.closest('.element');
-      listElement.remove();
+      deleteButton.closest('.element').remove();
     });
   }
 
   _generatePopapImage() {
-    this._element.querySelector(".element__image").addEventListener("click", () => {
+    this._card.querySelector(".element__image").addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
   }

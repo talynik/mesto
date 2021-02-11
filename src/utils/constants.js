@@ -10,6 +10,15 @@ export const elementsList = document.querySelector(".elements__list");
 export const popupImagePicture = document.querySelector(".popup__image_picture");
 export const popupNamePicture = document.querySelector(".popup__name_picture");
 
+//конфигурационный объект валидации
+export const validation = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 //массив первоначальных данных
 export const initialCards = [
   {
