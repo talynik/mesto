@@ -46,9 +46,9 @@
         <form class="popup__form popup__form_profile" name="formProfile">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input  autocomplete="off" type="text" id="name" name="profileName" class="popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="40" required>
-          <span id="name-error" class="popup__error_visible"></span>
+          <span id="name-error" class="popup__visible-error"></span>
           <input  autocomplete="off" type="text" id="description" name="profileDescription" class="popup__input" placeholder="Специализация" minlength="2" maxlength="200" required>
-          <span id="description-error" class="popup__error_visible"></span>
+          <span id="description-error" class="popup__visible-error"></span>
           <button class="popup__button popup__button_profile" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
@@ -60,9 +60,9 @@
         <form class="popup__form popup__form_mesto" name="formMesto">
           <h2 class="popup__title">Новое место</h2>
           <input  autocomplete="off" type="text" id="name-mesto" name="name" class="popup__input" placeholder="Название" minlength="2" maxlength="30" required>
-          <span id="name-mesto-error" class="popup__error_visible"></span>
+          <span id="name-mesto-error" class="popup__visible-error"></span>
           <input  autocomplete="off" type="url" id="url-mesto" name="link" class="popup__input" placeholder="Ссылка на картинку" required>
-          <span id="url-mesto-error" class="popup__error_visible"></span>
+          <span id="url-mesto-error" class="popup__visible-error"></span>
           <button class="popup__button popup__button_mesto" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
@@ -72,8 +72,8 @@
       <div class="popup__pole popup__pole_picture">
         <form class="popup__form_picture" name="formPicture">
           <button class="popup__close" type="button" aria-label="Закрыть"></button>
-          <img class="popup__image_picture">
-          <p class="popup__name_picture"></p>
+          <img class="popup__picture_image">
+          <p class="popup__picture_name"></p>
         </form>
       </div>
     </section>

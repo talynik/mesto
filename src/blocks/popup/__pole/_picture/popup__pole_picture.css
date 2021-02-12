@@ -5,7 +5,7 @@
 /* Основной код для разрешения 320px */
 @media screen and (min-width: calc(282px * 3 + 18px * 2)) {
   /* При ширине в три карточки */
-  popup__pole_picture {
+  .popup__pole_picture {
     margin: 41px auto 0px auto;
   }
 }
