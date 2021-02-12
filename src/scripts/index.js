@@ -35,7 +35,7 @@ const formValidator = new FormValidator(validation);
 profilePopupOpenButton.addEventListener("click", function() {
   user.setUserInfo();
   profile.open();
-  formValidator.enableValidation(".popup_profile");
+  formValidator.enableValidation(".popup__form_profile");
 });
 
 const openPopupPicture = new PopupWithImage(".popup_picture");
@@ -73,5 +73,5 @@ addCard.setEventListeners();
 // обработчик открытия попапа добавления места
 addPlaceButton.addEventListener("click", function() {
   addCard.open();
-  formValidator.enableValidation(".popup_mesto");
+  formValidator.enableValidation(".popup__form_mesto");
 });
