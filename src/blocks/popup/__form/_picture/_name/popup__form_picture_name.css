@@ -1,4 +1,4 @@
-.popup__picture_name {
+.popup__form_picture_name {
   align-self: flex-start;
   font-style: normal;
   font-weight: normal;
@@ -11,7 +11,7 @@
 /* Основной код для разрешения 320px */
  @media screen and (min-width: calc(282px * 2 + 18px)) {
       /* При ширине в две карточки */
-  .popup__picture_name {
+  .popup__form_picture_name {
     margin: 0px 40px 0px 40px;
   }
 }
