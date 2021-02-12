@@ -1,13 +1,17 @@
-.popup__form_picture-image {
-  max-width: 75vw;
-  max-height: 75vh;
+.popup__form_name {
+  align-self: flex-start;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
   margin: 0px 30px 0px 30px;
 }
 
 /* Основной код для разрешения 320px */
  @media screen and (min-width: calc(282px * 2 + 18px)) {
       /* При ширине в две карточки */
-  .popup__form_picture-image {
+  .popup__form_name {
     margin: 0px 40px 0px 40px;
   }
 }
