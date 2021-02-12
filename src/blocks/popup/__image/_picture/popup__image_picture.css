@@ -1,7 +1,7 @@
 .popup__image_picture {
   max-width: 75vw;
   max-height: 75vh;
-  margin: 0px 30px 0px 30px
+  margin: 0px 30px 0px 30px;
 }
 
 /* Основной код для разрешения 320px */
