@@ -29,6 +29,9 @@ formProfileValidator.enableValidation();
 const formMestoValidator = new FormValidator(validation, ".popup__form_mesto");
 formMestoValidator.enableValidation();
 
+const formAvatarValidator = new FormValidator(validation, ".popup__form_avatar");
+formAvatarValidator.enableValidation();
+
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData) {
     newUser.setUserInfo(formData);

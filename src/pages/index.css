@@ -23,7 +23,9 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__group/element__group.css);
 @import url(../blocks/element/__name/element__name.css);
+@import url(../blocks/element/__fanat/element__fanat.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__number-fanat/element__number-fanat.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/element/__button-delete/element__button-delete.css);
 

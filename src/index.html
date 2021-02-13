@@ -63,7 +63,7 @@
           <span id="name-mesto-error" class="popup__visible-error"></span>
           <input  autocomplete="off" type="url" id="url-mesto" name="link" class="popup__input" placeholder="Ссылка на картинку" required>
           <span id="url-mesto-error" class="popup__visible-error"></span>
-          <button class="popup__button popup__button_mesto" type="submit" aria-label="Сохранить">Сохранить</button>
+          <button class="popup__button popup__button_mesto" type="submit" aria-label="Создать">Создать</button>
         </form>
       </div>
     </section>
@@ -77,14 +77,40 @@
         </form>
       </div>
     </section>
+
+    <section class="popup popup_delete">
+      <div class="popup__pole">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form class="popup__form popup__form_delete" name="formDelete">
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__button popup__button_delete" type="submit" aria-label="Да">Да</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_avatar">
+      <div class="popup__pole">
+        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <form class="popup__form popup__form_avatar" name="formAvatar">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input  autocomplete="off" type="url" id="url-avatar" name="link" class="popup__input" placeholder="Ссылка на аватар" required>
+          <span id="url-avatar-error" class="popup__visible-error"></span>
+          <button class="popup__button popup__button_avatar" type="submit" aria-label="Сохранить">Сохранить</button>
+        </form>
+      </div>
+    </section>
     
   </div>
+  
   <template id="element-template">
     <li class="element">
       <img class="element__image">
         <div class="element__group">
           <h2 class="element__name"></h2>
-          <button class="element__like" type="button" aria-label="Нравится"></button>
+          </div class="element__fanat">
+            <button class="element__like" type="button" aria-label="Нравится"></button>
+            <h3 class="element__number-fanat">0</h3>
+          </div>
         </div>
       <button class="element__button-delete" type="button" aria-label="Удалить"></button>
     </li>
