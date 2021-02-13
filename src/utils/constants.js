@@ -7,8 +7,8 @@ export const profileDescriptionInput = document.querySelector("#description");
 export const placePopupNameInput = document.querySelector("#name-mesto");
 export const placePopupLinkInput = document.querySelector("#url-mesto");
 export const elementsList = document.querySelector(".elements__list");
-export const popupImagePicture = document.querySelector(".popup__form_image");
-export const popupNamePicture = document.querySelector(".popup__form_name");
+export const popupImagePicture = document.querySelector(".popup__picture_image");
+export const popupNamePicture = document.querySelector(".popup__picture_name");
 
 //конфигурационный объект валидации
 export const validation = {
