@@ -6,41 +6,49 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import {
   profilePopupOpenButton,
-  profileName,
-  profileDescription,
+  profileNameInput,
+  profileDescriptionInput,
   addPlaceButton,
   initialCards,
   elementsList,
+  popupImagePicture,
+  popupNamePicture,
   validation
 } from "../utils/constants.js";
 
 import '../pages/index.css';
 
-const user = new UserInfo({
-  name: profileName,
-  description: profileDescription
+const newUser = new UserInfo({
+  name: ".profile__name",
+  info: ".profile__description"
 });
+
+const formProfileValidator = new FormValidator(validation, ".popup__form_profile");
+formProfileValidator.enableValidation();
+
+const formMestoValidator = new FormValidator(validation, ".popup__form_mesto");
+formMestoValidator.enableValidation();
 
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData) {
-    user.getUserInfo(formData);
+    newUser.setUserInfo(formData);
   }
 });
 
 profile.setEventListeners();
 
-const formValidator = new FormValidator(validation);
-
 //обработка события открытие попа изменения профиля
 profilePopupOpenButton.addEventListener("click", function() {
-  user.setUserInfo();
-  profile.open();
-  formValidator.enableValidation(".popup__form_profile");
+  const user = newUser.getUserInfo();
+  profileNameInput.value = user.name;
+  profileDescriptionInput.value = user.description;
+  profile.open();  
 });
 
-const openPopupPicture = new PopupWithImage(".popup_picture");
+const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
 
+//функция создания новой карточки
 function newCard(item) {
   const card = new Card(item, "#element-template", {
     handleCardClick: function(name, link) {
@@ -73,5 +81,4 @@ addCard.setEventListeners();
 // обработчик открытия попапа добавления места
 addPlaceButton.addEventListener("click", function() {
   addCard.open();
-  formValidator.enableValidation(".popup__form_mesto");
 });

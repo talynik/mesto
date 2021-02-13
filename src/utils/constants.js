@@ -1,5 +1,3 @@
-export const profileName = document.querySelector(".profile__name");
-export const profileDescription = document.querySelector(".profile__description");
 export const profilePopupOpenButton = document.querySelector(".profile__edit-button");
 export const addPlaceButton  = document.querySelector(".profile__add-button");
 export const profileNameInput = document.querySelector("#name");
