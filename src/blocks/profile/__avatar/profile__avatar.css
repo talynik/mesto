@@ -3,4 +3,9 @@
   width: 120px;
   height: 120px;
   background: #C4C4C4;
+  cursor: pointer;
+}
+
+.profile__avatar:hover {
+  opacity: 0.2;
 }

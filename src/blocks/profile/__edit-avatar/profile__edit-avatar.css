@@ -1,0 +1,29 @@
+.profile__edit-avatar {
+    position: absolute;
+    top: 47px;
+    height: 26px;
+    width: 26px;
+    box-sizing: border-box;
+    background-color: transparent;
+    background-image: url(../../../images/edit.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px none #FFFFFF;
+    margin: 0px;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .profile__edit-avatar:hover {
+    opacity: 1;
+  }
+  
+/* Основной код для разрешения 320px */
+@media screen and (min-width: calc(282px * 3 + 18px * 2)) {
+    /* При ширине в три карточки */
+.profile__edit-avatar {
+  left: 47px;
+  margin: auto;
+  }
+}

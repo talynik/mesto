@@ -8,6 +8,7 @@
   background-position: center;
   background-size: contain;
   border: 1px solid #FFFFFF;
-  margin: 0px 6px 0px 22px;
+  margin: 0px 0px 3px 0px;
+  padding: 0px;
   cursor: pointer;
 }

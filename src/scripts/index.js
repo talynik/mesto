@@ -1,3 +1,4 @@
+import Api from "../components/Api.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js"
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -9,7 +10,6 @@ import {
   profileNameInput,
   profileDescriptionInput,
   addPlaceButton,
-  initialCards,
   elementsList,
   popupImagePicture,
   popupNamePicture,
@@ -20,8 +20,53 @@ import '../pages/index.css';
 
 const newUser = new UserInfo({
   name: ".profile__name",
-  info: ".profile__description"
+  about: ".profile__description"
 });
+
+const apiUser = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
+  headers: {
+    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045'
+  }
+});
+
+//заполнение данных профиля с сервера
+apiUser
+  .getAllTasks()
+  .then((data) => {
+    console.log(data);
+    newUser.setUserInfo({
+      name: data.name,
+      about: data.about
+    })
+    const avatar = document.querySelector('.profile__avatar');
+    avatar.src = data.avatar;
+  })
+  .catch(err=>console.log(err));
+
+const apiCards = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
+  headers: {
+    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045'
+  }
+});
+
+//добавление карточек с сервера
+apiCards
+.getAllTasks()
+.then((data) => {
+  const initialCards = data.map(item=>{
+    return {name: item.name, link: item.link}
+  });
+  const cardList = new Section({
+    data: initialCards,
+    renderer: function(item) {
+      cardList.addItem(newCard(item));
+    }
+  }, elementsList);
+  cardList.renderItems();
+})
+.catch(err=>console.log(err))
 
 const formProfileValidator = new FormValidator(validation, ".popup__form_profile");
 formProfileValidator.enableValidation();
@@ -44,7 +89,7 @@ profile.setEventListeners();
 profilePopupOpenButton.addEventListener("click", function() {
   const user = newUser.getUserInfo();
   profileNameInput.value = user.name;
-  profileDescriptionInput.value = user.description;
+  profileDescriptionInput.value = user.about;
   profile.open();  
 });
 
@@ -62,15 +107,8 @@ function newCard(item) {
   return cardElement;
 }
 
-//перебор данных из массива для добавления карточек
-const cardList = new Section({
-  data: initialCards,
-  renderer: function(item) {
-    cardList.addItem(newCard(item));
-  }
-}, elementsList);
 
-cardList.renderItems();
+
 
 //добавленние новой карточки
 const addCard = new PopupWithForm(".popup_mesto", {
