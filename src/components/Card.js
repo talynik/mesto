@@ -2,12 +2,19 @@ export default class Card {
   constructor(data, templateCard, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
+    this._likes = data.likes;
+    this._owner = data.owner;
     this._templateCard = templateCard;
     this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;
+    /* if (this._owner) {
+      const deleteButton = elementMesto.querySelector(".element__button-delete");
+      deleteButton.remove();
+    } */
     return elementMesto;
   }
 

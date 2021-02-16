@@ -26,12 +26,13 @@ const newUser = new UserInfo({
 const apiUser = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
   headers: {
-    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045'
+    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',
+    'Content-Type': 'application/json'
   }
 });
 
 //заполнение данных профиля с сервера
-apiUser
+const userId = apiUser
   .getAllTasks()
   .then((data) => {
     console.log(data);
@@ -41,13 +42,17 @@ apiUser
     })
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = data.avatar;
+    const id = data._id;
+    return id;
   })
   .catch(err=>console.log(err));
+  console.log(userId);
 
 const apiCards = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
   headers: {
-    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045'
+    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',
+    'Content-Type': 'application/json'
   }
 });
 
@@ -55,12 +60,20 @@ const apiCards = new Api({
 apiCards
 .getAllTasks()
 .then((data) => {
+  console.log(data);
   const initialCards = data.map(item=>{
-    return {name: item.name, link: item.link}
+    return {
+      name: item.name,
+      link: item.link,
+      id: item._id,
+      likes: item.likes.length,
+      owner: item.owner._id
+    }
   });
   const cardList = new Section({
     data: initialCards,
     renderer: function(item) {
+      console.log(item);
       cardList.addItem(newCard(item));
     }
   }, elementsList);
@@ -79,7 +92,15 @@ formAvatarValidator.enableValidation();
 
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData) {
-    newUser.setUserInfo(formData);
+    apiUser
+      .editTask(formData)
+      .then((data) => {
+        newUser.setUserInfo({
+          name: data.name,
+          about: data.about
+        })
+      })
+      .catch(err=>console.log(err));
   }
 });
 
@@ -98,7 +119,7 @@ openPopupPicture.setEventListeners();
 
 //функция создания новой карточки
 function newCard(item) {
-  const card = new Card(item, "#element-template", {
+  const card = new Card(item, "#element-template", userId, {
     handleCardClick: function(name, link) {
       openPopupPicture.open(name, link);
     }
@@ -107,13 +128,25 @@ function newCard(item) {
   return cardElement;
 }
 
-
-
-
 //добавленние новой карточки
 const addCard = new PopupWithForm(".popup_mesto", {
   handleFormSubmit: function(formData) {
-    cardList.addItem(newCard(formData));
+    console.log(formData);
+    apiCards
+      .addTask(formData)
+      .then((data) => {
+        console.log(data);
+        cardList.addItem(
+          newCard({
+            name: data.name,
+            link: data.link,
+            id: data._id,
+            likes: data.likes.length,
+            owner: data.owner._id
+          })
+        )
+      })
+      .catch(err=>console.log(err))
   }
 });
 

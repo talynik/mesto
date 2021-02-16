@@ -18,9 +18,20 @@ export default class Api{
     }).then(onError)
   }
 
-  addTask(data){
+  editTask(data){
+    console.log(data);
     return fetch(this._url, {
-      method: "POST",
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+    .then(onError)
+  }
+  
+  addTask(data){
+    console.log(data);
+    return fetch(this._url, {
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
     })
