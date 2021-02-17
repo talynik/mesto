@@ -32,21 +32,17 @@ const apiUser = new Api({
 });
 
 //заполнение данных профиля с сервера
-const userId = apiUser
+apiUser
   .getAllTasks()
   .then((data) => {
-    console.log(data);
     newUser.setUserInfo({
       name: data.name,
       about: data.about
     })
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = data.avatar;
-    const id = data._id;
-    return id;
   })
   .catch(err=>console.log(err));
-  console.log(userId);
 
 const apiCards = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
@@ -60,7 +56,6 @@ const apiCards = new Api({
 apiCards
 .getAllTasks()
 .then((data) => {
-  console.log(data);
   const initialCards = data.map(item=>{
     return {
       name: item.name,
@@ -73,7 +68,6 @@ apiCards
   const cardList = new Section({
     data: initialCards,
     renderer: function(item) {
-      console.log(item);
       cardList.addItem(newCard(item));
     }
   }, elementsList);
@@ -119,7 +113,7 @@ openPopupPicture.setEventListeners();
 
 //функция создания новой карточки
 function newCard(item) {
-  const card = new Card(item, "#element-template", userId, {
+  const card = new Card(item, "#element-template", {
     handleCardClick: function(name, link) {
       openPopupPicture.open(name, link);
     }
@@ -131,16 +125,13 @@ function newCard(item) {
 //добавленние новой карточки
 const addCard = new PopupWithForm(".popup_mesto", {
   handleFormSubmit: function(formData) {
-    console.log(formData);
     apiCards
       .addTask(formData)
       .then((data) => {
-        console.log(data);
         cardList.addItem(
           newCard({
             name: data.name,
             link: data.link,
-            id: data._id,
             likes: data.likes.length,
             owner: data.owner._id
           })
