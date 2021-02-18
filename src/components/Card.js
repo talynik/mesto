@@ -1,26 +1,27 @@
 export default class Card {
-  constructor(data, templateCard, {handleCardClick}) {
+  constructor(data, templateCard, idUser, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._owner = data.owner;
     this._templateCard = templateCard;
     this._handleCardClick = handleCardClick;
+    this._idUser = idUser
   }
 
   _getTemplate() {
     const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;
-    /* if (this._owner) {
-      const deleteButton = elementMesto.querySelector(".element__button-delete");
-      deleteButton.remove();
-    } */
+    elementMesto.querySelector(".element__number-fanat").textContent = this._likes;
+    if (this._owner != this._idUser) {
+      elementMesto.querySelector(".element__button-delete").remove();
+    }
     return elementMesto;
   }
 
   generateCard() {
     this._card = this._getTemplate();
     this._likeEventListener();
-    this._deleteEventListener();
+    /* this._deleteEventListener(); */
     this._generatePopapImage();
 
     this._picture = this._card.querySelector('.element__image');

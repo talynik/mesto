@@ -3,6 +3,7 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js"
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithOk from "../components/PopupWithOk";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import {
@@ -13,7 +14,9 @@ import {
   elementsList,
   popupImagePicture,
   popupNamePicture,
-  validation
+  validation,
+  url,
+  headers
 } from "../utils/constants.js";
 
 import '../pages/index.css';
@@ -25,10 +28,7 @@ const newUser = new UserInfo({
 
 const apiUser = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
-  headers: {
-    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',
-    'Content-Type': 'application/json'
-  }
+  headers
 });
 
 //заполнение данных профиля с сервера
@@ -41,39 +41,51 @@ apiUser
     })
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = data.avatar;
+    const idUser = data._id;
+    return idUser;
+  })
+  .then((idUser) => {
+    
+      //функция создания новой карточки
+    function newCard(item) {
+      const card = new Card(item, "#element-template", idUser, {
+        handleCardClick: function(name, link) {
+          openPopupPicture.open(name, link);
+        }
+      });
+      const cardElement = card.generateCard();
+      return cardElement;
+    }
+
+      //добавление карточек с сервера
+    apiCards
+    .getAllTasks()
+    .then((data) => {
+      const initialCards = data.map(item=>{
+        return {
+          name: item.name,
+          link: item.link,
+          id: item._id,
+          likes: item.likes.length,
+          owner: item.owner._id
+        }
+      });
+      const cardList = new Section({
+        data: initialCards,
+        renderer: function(item) {
+          cardList.addItem(newCard(item));
+        }
+      }, elementsList);
+      cardList.renderItems();
+    })    
+    .catch(err=>console.log(err))
   })
   .catch(err=>console.log(err));
-
+  
 const apiCards = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
-  headers: {
-    authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',
-    'Content-Type': 'application/json'
-  }
+  headers
 });
-
-//добавление карточек с сервера
-apiCards
-.getAllTasks()
-.then((data) => {
-  const initialCards = data.map(item=>{
-    return {
-      name: item.name,
-      link: item.link,
-      id: item._id,
-      likes: item.likes.length,
-      owner: item.owner._id
-    }
-  });
-  const cardList = new Section({
-    data: initialCards,
-    renderer: function(item) {
-      cardList.addItem(newCard(item));
-    }
-  }, elementsList);
-  cardList.renderItems();
-})
-.catch(err=>console.log(err))
 
 const formProfileValidator = new FormValidator(validation, ".popup__form_profile");
 formProfileValidator.enableValidation();
@@ -111,39 +123,16 @@ profilePopupOpenButton.addEventListener("click", function() {
 const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
 
-//функция создания новой карточки
-function newCard(item) {
-  const card = new Card(item, "#element-template", {
-    handleCardClick: function(name, link) {
-      openPopupPicture.open(name, link);
-    }
-  });
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
-//добавленние новой карточки
-const addCard = new PopupWithForm(".popup_mesto", {
-  handleFormSubmit: function(formData) {
-    apiCards
-      .addTask(formData)
-      .then((data) => {
-        cardList.addItem(
-          newCard({
-            name: data.name,
-            link: data.link,
-            likes: data.likes.length,
-            owner: data.owner._id
-          })
-        )
-      })
-      .catch(err=>console.log(err))
-  }
-});
-
-addCard.setEventListeners();
-
-// обработчик открытия попапа добавления места
+// обработчик открытия попапа добавления карточки
 addPlaceButton.addEventListener("click", function() {
   addCard.open();
 });
+
+/* const deleteButton = document.querySelectorAll('.element__button-delete');
+
+popupDelete = document.querySelector(".popup_deletee");
+deleteButton.addEventListener('click', function () {
+  const Card = deleteButton.closest('.element');
+  const popupOk = new PopupWithOk(popupDelete,)
+  deleteButton.closest('.element').remove();
+}); */
