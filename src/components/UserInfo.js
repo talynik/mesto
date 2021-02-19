@@ -16,4 +16,12 @@ export default class UserInfo {
     this._profileName.textContent = formData.name;
     this._profileDescription.textContent = formData.about;
   }
+
+  setUserId(id) {
+    this._idUser = id;
+  }
+
+  returnUserId() {
+    return this._idUser;
+  }
 }

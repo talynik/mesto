@@ -1,13 +1,13 @@
 export default class Card {
-  constructor(data, templateCard, idUser, {handleCardClick}) {
+  constructor(data, templateCard, {idUser}, {handleCardClick}) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes;
-    this._owner = data.owner;
+    this._likes = data.likes.length;
+    this._owner = data.owner._id;
     this._templateCard = templateCard;
     this._handleCardClick = handleCardClick;
     this._idUser = idUser
-  }
+   }
 
   _getTemplate() {
     const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;

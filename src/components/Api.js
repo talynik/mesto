@@ -19,7 +19,6 @@ export default class Api{
   }
 
   editTask(data){
-    console.log(data);
     return fetch(this._url, {
       method: 'PATCH',
       headers: this._headers,
@@ -29,7 +28,6 @@ export default class Api{
   }
   
   addTask(data){
-    console.log(data);
     return fetch(this._url, {
       method: 'POST',
       headers: this._headers,

@@ -54,72 +54,56 @@ apiUser
     })
     const avatar = document.querySelector('.profile__avatar');
     avatar.src = data.avatar;
-    const idUser = data._id;
-    return idUser;
-  })
-  .then((idUser) => {
-    
-      //функция создания новой карточки
-    function newCard(item) {
-      const card = new Card(item, "#element-template", idUser, {
-        handleCardClick: function(name, link) {
-          openPopupPicture.open(name, link);
-        }
-      });
-      const cardElement = card.generateCard();
-      return cardElement;
-    }
-
-      //добавление карточек с сервера
-    apiCards
-    .getAllTasks()
-    .then((data) => {
-      const initialCards = data.map(item=>{
-        return {
-          name: item.name,
-          link: item.link,
-          id: item._id,
-          likes: item.likes.length,
-          owner: item.owner._id
-        }
-      });
-      const cardList = new Section({
-        data: initialCards,
-        renderer: function(item) {
-          cardList.addItem(newCard(item));
-        }
-      }, elementsList);
-      cardList.renderItems();
-    })    
-    .catch(err=>console.log(err))
-
-      //добавленние новой карточки
-    const addCard = new PopupWithForm(".popup_mesto", {
-      handleFormSubmit: function(formData) {
-        apiCards
-          .addTask(formData)
-          .then((data) => {
-            cardList.addItem(
-              newCard({
-                name: data.name,
-                link: data.link,
-                id: data._id,
-                likes: data.likes.length,
-                owner: data.owner._id
-              })
-            )
-          })
-          .catch(err=>console.log(err))
-      }
-    });
-      // обработчик открытия попапа добавления карточки
-    addPlaceButton.addEventListener("click", function() {
-      addCard.open();
-    });
-
-    addCard.setEventListeners();
+    newUser.setUserId(data._id);
   })
   .catch(err=>console.log(err));
+    
+  //функция создания новой карточки
+function newCard(item) {
+  const card = new Card(
+    item,
+    "#element-template",
+    {idUser: newUser.returnUserId()}, {
+    handleCardClick: function(name, link) {
+      openPopupPicture.open(name, link);
+    }
+  });
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+const cardList = new Section((item) => {
+    cardList.addItem(newCard(item));
+}, elementsList);
+
+  //добавление карточек с сервера
+apiCards
+  .getAllTasks()
+  .then((data) => {
+    //console.log(data);
+    cardList.renderItems(data);
+  })    
+  .catch(err=>console.log(err))
+
+  //добавленние новой карточки
+const addCard = new PopupWithForm(".popup_mesto", {
+  handleFormSubmit: function(formData) {
+    apiCards
+      .addTask(formData)
+      .then((data) => {
+        cardList.addItem(newCard(data));
+      })
+      .catch(err=>console.log(err))
+  }
+});
+
+  // обработчик открытия попапа добавления карточки
+addPlaceButton.addEventListener("click", function() {
+  addCard.open();
+});
+
+addCard.setEventListeners();
+
 
   //изменение данных профиля
 const profile = new PopupWithForm(".popup_profile", {
@@ -148,12 +132,17 @@ profilePopupOpenButton.addEventListener("click", function() {
 const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
 
-/* 
-const deleteButton = document.querySelectorAll('.element__button-delete');
 
-popupDelete = document.querySelector(".popup_delete");
+/* const deleteButton = document.querySelector('.element__button-delete');
+console.log(deleteButton);
+
+const openPopupDelete = new PopupWithOk(".popup_delete", popupImagePicture, popupNamePicture);
+openPopupDelete.setEventListeners();
+
 deleteButton.addEventListener('click', function () {
   const Card = deleteButton.closest('.element');
   const popupOk = new PopupWithOk(popupDelete,)
   deleteButton.closest('.element').remove();
-}); */
+  openPopupDelete.open();
+});
+ */
