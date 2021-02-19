@@ -16,8 +16,6 @@ export const validation = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__visible-error'
 };
-
-export const url = 'https://mesto.nomoreparties.co/v1/cohort-20/';
   
 export const headers = {
     authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',

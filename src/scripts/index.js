@@ -15,11 +15,19 @@ import {
   popupImagePicture,
   popupNamePicture,
   validation,
-  url,
   headers
 } from "../utils/constants.js";
 
 import '../pages/index.css';
+
+const formProfileValidator = new FormValidator(validation, ".popup__form_profile");
+formProfileValidator.enableValidation();
+
+const formMestoValidator = new FormValidator(validation, ".popup__form_mesto");
+formMestoValidator.enableValidation();
+
+const formAvatarValidator = new FormValidator(validation, ".popup__form_avatar");
+formAvatarValidator.enableValidation();
 
 const newUser = new UserInfo({
   name: ".profile__name",
@@ -28,6 +36,11 @@ const newUser = new UserInfo({
 
 const apiUser = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
+  headers
+});
+  
+const apiCards = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
   headers
 });
 
@@ -79,23 +92,36 @@ apiUser
       cardList.renderItems();
     })    
     .catch(err=>console.log(err))
+
+      //добавленние новой карточки
+    const addCard = new PopupWithForm(".popup_mesto", {
+      handleFormSubmit: function(formData) {
+        apiCards
+          .addTask(formData)
+          .then((data) => {
+            cardList.addItem(
+              newCard({
+                name: data.name,
+                link: data.link,
+                id: data._id,
+                likes: data.likes.length,
+                owner: data.owner._id
+              })
+            )
+          })
+          .catch(err=>console.log(err))
+      }
+    });
+      // обработчик открытия попапа добавления карточки
+    addPlaceButton.addEventListener("click", function() {
+      addCard.open();
+    });
+
+    addCard.setEventListeners();
   })
   .catch(err=>console.log(err));
-  
-const apiCards = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
-  headers
-});
 
-const formProfileValidator = new FormValidator(validation, ".popup__form_profile");
-formProfileValidator.enableValidation();
-
-const formMestoValidator = new FormValidator(validation, ".popup__form_mesto");
-formMestoValidator.enableValidation();
-
-const formAvatarValidator = new FormValidator(validation, ".popup__form_avatar");
-formAvatarValidator.enableValidation();
-
+  //изменение данных профиля
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData) {
     apiUser
@@ -109,7 +135,6 @@ const profile = new PopupWithForm(".popup_profile", {
       .catch(err=>console.log(err));
   }
 });
-
 profile.setEventListeners();
 
 //обработка события открытие попа изменения профиля
@@ -123,14 +148,10 @@ profilePopupOpenButton.addEventListener("click", function() {
 const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
 
-// обработчик открытия попапа добавления карточки
-addPlaceButton.addEventListener("click", function() {
-  addCard.open();
-});
+/* 
+const deleteButton = document.querySelectorAll('.element__button-delete');
 
-/* const deleteButton = document.querySelectorAll('.element__button-delete');
-
-popupDelete = document.querySelector(".popup_deletee");
+popupDelete = document.querySelector(".popup_delete");
 deleteButton.addEventListener('click', function () {
   const Card = deleteButton.closest('.element');
   const popupOk = new PopupWithOk(popupDelete,)
