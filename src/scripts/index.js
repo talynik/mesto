@@ -57,17 +57,23 @@ apiUser
     newUser.setUserId(data._id);
   })
   .catch(err=>console.log(err));
+
+  const openPopupDelete = new PopupWithOk(".popup_delete");
     
   //функция создания новой карточки
 function newCard(item) {
   const card = new Card(
     item,
     "#element-template",
-    {idUser: newUser.returnUserId()}, {
-    handleCardClick: function(name, link) {
+    {idUser: newUser.returnUserId()},
+    {handleCardClick: function(name, link) {
       openPopupPicture.open(name, link);
-    }
-  });
+    }},
+    {handleClikDelete: () => {
+      openPopupDelete.setEventListeners();
+      openPopupDelete.open();
+    }}
+  );
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -131,18 +137,3 @@ profilePopupOpenButton.addEventListener("click", function() {
 
 const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
-
-
-/* const deleteButton = document.querySelector('.element__button-delete');
-console.log(deleteButton);
-
-const openPopupDelete = new PopupWithOk(".popup_delete", popupImagePicture, popupNamePicture);
-openPopupDelete.setEventListeners();
-
-deleteButton.addEventListener('click', function () {
-  const Card = deleteButton.closest('.element');
-  const popupOk = new PopupWithOk(popupDelete,)
-  deleteButton.closest('.element').remove();
-  openPopupDelete.open();
-});
- */

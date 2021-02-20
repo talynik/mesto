@@ -1,18 +1,18 @@
 export default class Card {
-  constructor(data, templateCard, {idUser}, {handleCardClick}) {
+  constructor(data, templateCard, {idUser}, {handleCardClick}, {handleClikDelete}) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
     this._owner = data.owner._id;
     this._templateCard = templateCard;
     this._handleCardClick = handleCardClick;
-    this._idUser = idUser
+    this._idUser = idUser;
+    this._handleClikDelete = handleClikDelete;
    }
 
   _getTemplate() {
     const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;
     elementMesto.querySelector(".element__number-fanat").textContent = this._likes;
-
     return elementMesto;
   }
 
@@ -44,7 +44,7 @@ export default class Card {
 
     const deleteButton = this._card.querySelector('.element__button-delete');
     deleteButton.addEventListener('click', () => {
-      deleteButton.closest('.element').remove();
+      this._handleClikDelete();
     });
 
     this._card.querySelector(".element__image").addEventListener("click", () => {
