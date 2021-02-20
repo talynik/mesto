@@ -58,7 +58,18 @@ apiUser
   })
   .catch(err=>console.log(err));
 
-  const openPopupDelete = new PopupWithOk(".popup_delete");
+const openPopupDelete = new PopupWithOk(
+  ".popup_delete",
+  {handleDeleteCard: (idCard) => {
+    console.log(idCard);
+    apiCards
+    .removeTask(idCard)
+    .then(() => {
+      card.deleteCard();
+    })    
+    .catch(err=>console.log(err))
+  }}
+);
     
   //функция создания новой карточки
 function newCard(item) {
@@ -69,9 +80,9 @@ function newCard(item) {
     {handleCardClick: function(name, link) {
       openPopupPicture.open(name, link);
     }},
-    {handleClikDelete: () => {
-      openPopupDelete.setEventListeners();
+    {handleClikDelete: (idCard) => {
       openPopupDelete.open();
+      openPopupDelete.setEventListeners(idCard);
     }}
   );
   const cardElement = card.generateCard();
@@ -86,7 +97,6 @@ const cardList = new Section((item) => {
 apiCards
   .getAllTasks()
   .then((data) => {
-    //console.log(data);
     cardList.renderItems(data);
   })    
   .catch(err=>console.log(err))
@@ -102,6 +112,17 @@ const addCard = new PopupWithForm(".popup_mesto", {
       .catch(err=>console.log(err))
   }
 });
+
+/*   //функция удаления карточки
+  function delCard(id) {
+    apiCards
+    .removeTask(id)
+    .then((data) => {
+      cardList.renderItems(data);
+    })    
+    .catch(err=>console.log(err))
+  }
+   */
 
   // обработчик открытия попапа добавления карточки
 addPlaceButton.addEventListener("click", function() {

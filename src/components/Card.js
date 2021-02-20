@@ -2,6 +2,7 @@ export default class Card {
   constructor(data, templateCard, {idUser}, {handleCardClick}, {handleClikDelete}) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._likes = data.likes.length;
     this._owner = data.owner._id;
     this._templateCard = templateCard;
@@ -16,6 +17,7 @@ export default class Card {
     return elementMesto;
   }
 
+    //удаление корзинок с чужих картинок
   _deleteTrash() {
     if (this._owner != this._idUser) {
       this._card.querySelector(".element__button-delete").remove();
@@ -35,6 +37,12 @@ export default class Card {
   
     return this._card;
   }
+  
+    //удаление карточки
+  deleteCard() {
+    this._card.remove();
+    this._card = null;
+  }
 
   _setEventListener() {
     const like = this._card.querySelector('.element__like');
@@ -44,7 +52,7 @@ export default class Card {
 
     const deleteButton = this._card.querySelector('.element__button-delete');
     deleteButton.addEventListener('click', () => {
-      this._handleClikDelete();
+      this._handleClikDelete(this._id);
     });
 
     this._card.querySelector(".element__image").addEventListener("click", () => {
