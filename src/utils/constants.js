@@ -7,6 +7,9 @@ export const placePopupLinkInput = document.querySelector("#url-mesto");
 export const elementsList = document.querySelector(".elements__list");
 export const popupImagePicture = document.querySelector(".popup__picture_image");
 export const popupNamePicture = document.querySelector(".popup__picture_name");
+export const avatar = document.querySelector('.profile__avatar');
+export const avatarPopupOpenButton = document.querySelector(".profile__edit-avatar");
+export const popupButton = document.querySelector(".popup__button");
 
 //конфигурационный объект валидации
 export const validation = {
@@ -23,3 +26,5 @@ export const headers = {
 };
 
 //   https://1001puzzle.ru/upload/iblock/656/65681eeab856f92b586e8bc6c8ef6b3a.jpg
+
+//  https://i.stack.imgur.com/BdqMQ.jpg?s=328&g=1

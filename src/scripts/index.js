@@ -8,6 +8,8 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import {
   profilePopupOpenButton,
+  avatar,
+  avatarPopupOpenButton,
   profileNameInput,
   profileDescriptionInput,
   addPlaceButton,
@@ -44,7 +46,7 @@ const apiCards = new Api({
   headers
 });
 
-//заполнение данных профиля с сервера
+  //заполнение данных профиля с сервера
 apiUser
   .getAllTasks()
   .then((data) => {
@@ -52,16 +54,66 @@ apiUser
       name: data.name,
       about: data.about
     })
-    const avatar = document.querySelector('.profile__avatar');
     avatar.src = data.avatar;
     newUser.setUserId(data._id);
   })
   .catch(err=>console.log(err));
 
+  //изменение данных профиля
+const profile = new PopupWithForm(".popup_profile", {
+  handleFormSubmit: function(formData, button) {
+    apiUser
+      .editTask(formData)
+      .then((data) => {
+        newUser.setUserInfo({
+          name: data.name,
+          about: data.about
+        })
+      })
+      .catch(err=>console.log(err))
+      .finally(() => {
+        renderLoading(false, button);
+      });
+      console.log(profile);
+    renderLoading(true, button);
+  }
+});
+profile.setEventListeners();
+
+  //обработка события открытие попа изменения профиля
+profilePopupOpenButton.addEventListener("click", function() {
+  const user = newUser.getUserInfo();
+  profileNameInput.value = user.name;
+  profileDescriptionInput.value = user.about;
+  profile.open();  
+});
+
+  //изменение аватарки
+const avatarPopup = new PopupWithForm(".popup_avatar", {
+  handleFormSubmit: function(ava, button) {
+    apiUser
+      .editTask(ava)
+      .then((data) => {
+        avatar.src = data.avatar;
+      })
+      .catch(err=>console.log(err))
+      .finally(() => {
+        renderLoading(false, button);
+      });
+    renderLoading(true, button);
+  }
+});
+avatarPopup.setEventListeners();
+
+  //открытие попапа изменения аватарки
+avatarPopupOpenButton.addEventListener("click", function() {
+  avatarPopup.open();  
+});
+
+  //удаление карточек
 const openPopupDelete = new PopupWithOk(
   ".popup_delete",
   {handleDeleteCard: (idCard) => {
-    console.log(idCard);
     apiCards
     .removeTask(idCard)
     .then(() => {
@@ -103,26 +155,20 @@ apiCards
 
   //добавленние новой карточки
 const addCard = new PopupWithForm(".popup_mesto", {
-  handleFormSubmit: function(formData) {
+  handleFormSubmit: function(formData, button) {
+    renderLoading(true, addCard);
     apiCards
       .addTask(formData)
       .then((data) => {
         cardList.addItem(newCard(data));
       })
       .catch(err=>console.log(err))
+      .finally(() => {
+        renderLoading(false, button);
+      });
+    renderLoading(true, button);
   }
 });
-
-/*   //функция удаления карточки
-  function delCard(id) {
-    apiCards
-    .removeTask(id)
-    .then((data) => {
-      cardList.renderItems(data);
-    })    
-    .catch(err=>console.log(err))
-  }
-   */
 
   // обработчик открытия попапа добавления карточки
 addPlaceButton.addEventListener("click", function() {
@@ -131,30 +177,16 @@ addPlaceButton.addEventListener("click", function() {
 
 addCard.setEventListeners();
 
-
-  //изменение данных профиля
-const profile = new PopupWithForm(".popup_profile", {
-  handleFormSubmit: function(formData) {
-    apiUser
-      .editTask(formData)
-      .then((data) => {
-        newUser.setUserInfo({
-          name: data.name,
-          about: data.about
-        })
-      })
-      .catch(err=>console.log(err));
-  }
-});
-profile.setEventListeners();
-
-//обработка события открытие попа изменения профиля
-profilePopupOpenButton.addEventListener("click", function() {
-  const user = newUser.getUserInfo();
-  profileNameInput.value = user.name;
-  profileDescriptionInput.value = user.about;
-  profile.open();  
-});
-
 const openPopupPicture = new PopupWithImage(".popup_picture", popupImagePicture, popupNamePicture);
 openPopupPicture.setEventListeners();
+
+
+function renderLoading(isLoading, button) {
+  console.log(isLoading);
+  console.log(button);
+  if (isLoading) {
+    button.textContent = "Сохранение..."
+  } else {
+    button.textContent = "Сохраненить"
+  }
+}
