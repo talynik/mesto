@@ -74,7 +74,6 @@ const profile = new PopupWithForm(".popup_profile", {
       .finally(() => {
         renderLoading(false, button);
       });
-      console.log(profile);
     renderLoading(true, button);
   }
 });
@@ -182,8 +181,6 @@ openPopupPicture.setEventListeners();
 
 
 function renderLoading(isLoading, button) {
-  console.log(isLoading);
-  console.log(button);
   if (isLoading) {
     button.textContent = "Сохранение..."
   } else {

@@ -9,10 +9,18 @@ export default class PopupWithOk extends Popup {
 
   setEventListeners(idCard) {
     super.setEventListeners();
-    this.handleClikOk = idCard;
+    this._handleClikOk = idCard;
     this._buttonOk.addEventListener('click', () => {
-    this._handleDeleteCard(this.handleClikOk);
+    this._handleDeleteCard(this._handleClikOk);
     this.close();
-    });      
+    });
+  }
+
+  close() {
+    super.close();
+    this._buttonOk.removeEventListener('click', () => {
+      this._handleDeleteCard(this._handleClikOk);
+      this.close();
+      });
   }
 }

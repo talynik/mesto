@@ -20,12 +20,13 @@ export default class Card {
     //удаление корзинок с чужих картинок
   _deleteTrash() {
     if (this._owner != this._idUser) {
-      this._card.querySelector(".element__button-delete").remove();
+      this._deleteButton.remove();
     }
   }
 
   generateCard() {
     this._card = this._getTemplate();
+    this._deleteButton = this._card.querySelector('.element__button-delete');
     
     this._picture = this._card.querySelector('.element__image');
     this._picture.src = this._link;
@@ -50,8 +51,7 @@ export default class Card {
       like.classList.toggle('element__like_active');
     });
 
-    const deleteButton = this._card.querySelector('.element__button-delete');
-    deleteButton.addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._handleClikDelete(this._id);
     });
 
