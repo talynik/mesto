@@ -17,11 +17,16 @@ export default class UserInfo {
     this._profileDescription.textContent = formData.about;
   }
 
-  setUserId(id) {
-    this._idUser = id;
+  setUser(data) {
+    this._idUser = data._id;
+    this._user = data;
   }
 
   returnUserId() {
     return this._idUser;
+  }
+
+  returnUser() {
+    return this._user;
   }
 }

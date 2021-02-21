@@ -56,7 +56,7 @@ apiUser
       about: data.about
     })
     avatar.src = data.avatar;
-    newUser.setUserId(data._id);
+    newUser.setUser(data);
   })
   .catch(err=>console.log(err));
 
@@ -92,11 +92,9 @@ profilePopupOpenButton.addEventListener("click", function() {
   //изменение аватарки
 const avatarPopup = new PopupWithForm(".popup_avatar", {
   handleFormSubmit: function(ava, button) {
-    console.log(ava)
     apiUser
       .editAvatar(ava)
       .then((data) => {
-        console.log(data)
         avatar.src = data.avatar;
       })
       .catch(err=>console.log(err))
@@ -125,6 +123,7 @@ const openPopupDelete = new PopupWithOk(
     .catch(err=>console.log(err))
   }}
 );
+openPopupDelete.setEventListeners();
     
   //функция создания новой карточки
 function newCard(item) {
@@ -136,27 +135,24 @@ function newCard(item) {
       openPopupPicture.open(name, link);
     }},
     {handleClikDelete: (idCard) => {
-      openPopupDelete.open();
-      openPopupDelete.setEventListeners(idCard);
+      openPopupDelete.open(idCard);
     }},
-    {handleClickLike: (editLike, idCard) => {
-      console.log(idCard);
-      console.log(editLike);
-      //изменение количества лайков
-      apiCards
-        .getLike(idCard)
-        .then((data) => {
-          console.log(data);
-          console.log(dala.like.lenght)
-          /* fanat = data.likes.length;
-          fanat += editLike;
-        })
-        .editLike(id, data.fanat)
-        .then(
-
-        ) */
-        })
-        .catch(err=>console.log(err))
+    {handleClickLike: (onLike, idCard) => {
+      if(!onLike) {
+        apiCards
+          .addLike(idCard)
+          .then(() => {
+            card.getLike();
+          })
+          .catch(err=>console.log(err))
+      } else {
+        apiCards
+          .removeTask(idCard)
+          .then(() => {
+            card.delLike();
+          })
+          .catch(err=>console.log(err))
+      }
     }}
   );
   const cardElement = card.generateCard();

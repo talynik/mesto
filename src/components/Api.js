@@ -36,6 +36,24 @@ export default class Api{
     })
     .then(onError)
   }
+
+  //добавить лайк
+  addLike(id){
+    return fetch(`${this._url}/likes/${id}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(onError)
+  }
+
+  //удалить лайк
+  removeTask(id){
+    return fetch(`${this._url}/likes/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(onError)
+  }
   
   addTask(data){
     return fetch(this._url, {

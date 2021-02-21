@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._id = data._id;
     this._likes = data.likes;
+    this._fanat = data.likes.length;
     this._owner = data.owner._id;
     this._templateCard = templateCard;
     this._handleCardClick = handleCardClick;
@@ -17,37 +18,48 @@ export default class Card {
     return elementMesto;
   }
 
-    //удаление корзинок с чужих картинок
-  _deleteTrash() {
-    if (this._owner != this._idUser) {
-      this._deleteButton.remove();
-    }
+  //функция установки лайка
+  getLike() {
+    this._like.classList.add('element__like_active');
+    this._numberLike.textContent = this._fanat + 1;
   }
 
-  //функция установки количества лайков
-  getLike() {
-    this._card.querySelector(".element__number-fanat").textContent = this._likes.length;
+  //функция удаления лайка
+  delLike() {
+    this._like.classList.remove('element__like_active');
+    this._numberLike.textContent = this._fanat - 1;
   }
 
   generateCard() {
     this._card = this._getTemplate();
     this._deleteButton = this._card.querySelector('.element__button-delete');
     this._like = this._card.querySelector('.element__like');
+    this._numberLike = this._card.querySelector(".element__number-fanat");
+      
+      //удаление корзинок с чужих карточек
+    if (this._owner != this._idUser) {
+      this._deleteButton.remove();
+    }
+
       //проверка моих лайков на сервере и их установка
     this._likes.forEach((item) => {
-      if(item._id === this.idUser) {
+      if(item._id === this._idUser) {
         this._like.classList.add('element__like_active');
+        this._likeActiv = 'true';
       }
     })
+
+      //установка количества лайков
+    this._numberLike.textContent = this._fanat;
     
     this._picture = this._card.querySelector('.element__image');
     this._picture.src = this._link;
     this._picture.alt = this._name;
     this._card.querySelector('.element__name').textContent = this._name;
 
-    this._setEventListener();
-    this._deleteTrash();
-    this.getLike();
+    this._likeEventListener();
+    this._deleteEventListener();
+    this._generatePopapImage();
   
     return this._card;
   }
@@ -58,23 +70,23 @@ export default class Card {
     this._card = null;
   }
 
-  _setEventListener() {
-    this._like.addEventListener('click', () => {
-      this._like.classList.toggle('element__like_active');
-      if(this._like.classList.length === 2) {
-        this._editLike = 1;
-      } else {
-        this._editLike = -1;
-      }
-      this._handleClickLike(this._editLike, this._id);
-    });
+ 
+_likeEventListener() {
+  this._like.addEventListener('click', () => {
+    this._handleClickLike((this._likeActiv), this._id);
+  });
+}
 
-    this._deleteButton.addEventListener('click', () => {
-      this._handleClikDelete(this._id);
-    });
+_deleteEventListener() {
+  this._deleteButton.addEventListener('click', () => {
+    this._handleClikDelete(this._id);
+  });
+}
 
-    this._card.querySelector(".element__image").addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
-  }
+_generatePopapImage() {
+  this._card.querySelector(".element__image").addEventListener("click", () => {
+    this._handleCardClick(this._name, this._link);
+  });
+}
+
 }
