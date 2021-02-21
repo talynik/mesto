@@ -47,7 +47,7 @@ export default class Api{
   }
 
   //удалить лайк
-  removeTask(id){
+  removeLike(id){
     return fetch(`${this._url}/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,

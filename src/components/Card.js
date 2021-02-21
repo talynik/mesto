@@ -22,12 +22,14 @@ export default class Card {
   getLike() {
     this._like.classList.add('element__like_active');
     this._numberLike.textContent = this._fanat + 1;
+    this._likeActiv = !this._likeActiv;
   }
 
   //функция удаления лайка
   delLike() {
     this._like.classList.remove('element__like_active');
     this._numberLike.textContent = this._fanat - 1;
+    this._likeActiv = !this._likeActiv;
   }
 
   generateCard() {

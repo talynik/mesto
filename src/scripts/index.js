@@ -50,7 +50,6 @@ const apiCards = new Api({
 apiUser
   .getAllTasks()
   .then((data) => {
-    console.log(data)
     newUser.setUserInfo({
       name: data.name,
       about: data.about
@@ -63,7 +62,6 @@ apiUser
   //изменение данных профиля
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData, button) {
-    console.log(formData)
     apiUser
       .editTask(formData)
       .then((data) => {
@@ -147,7 +145,7 @@ function newCard(item) {
           .catch(err=>console.log(err))
       } else {
         apiCards
-          .removeTask(idCard)
+          .removeLike(idCard)
           .then(() => {
             card.delLike();
           })
@@ -167,7 +165,6 @@ const cardList = new Section((item) => {
 apiCards
   .getAllTasks()
   .then((data) => {
-    console.log(data);
     cardList.renderItems(data);
   })    
   .catch(err=>console.log(err))
