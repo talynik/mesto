@@ -32,6 +32,10 @@ export default class Card {
     this._likeActiv = !this._likeActiv;
   }
 
+  delCard() {
+    this._card.remove();
+  }
+
   generateCard() {
     this._card = this._getTemplate();
     this._deleteButton = this._card.querySelector('.element__button-delete');
@@ -74,7 +78,7 @@ _likeEventListener() {
 
 _deleteEventListener() {
   this._deleteButton.addEventListener('click', () => {
-    this._handleClikDelete(this._id, this._card);
+    this._handleClikDelete(this._id);
   });
 }
 

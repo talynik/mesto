@@ -110,17 +110,7 @@ avatarPopupOpenButton.addEventListener("click", function() {
 });
 
   //удаление карточек
-const openPopupDelete = new PopupWithOk(
-  ".popup_delete",
-  {handleDeleteCard: (idCard, element) => {
-    apiCards
-    .removeTask(idCard)
-    .then(() => {
-      cardList.delCard(element);
-    })    
-    .catch(err=>console.log(err))
-  }}
-);
+const openPopupDelete = new PopupWithOk(".popup_delete");
 openPopupDelete.setEventListeners();
     
   //функция создания новой карточки
@@ -132,8 +122,16 @@ function newCard(item) {
     {handleCardClick: function(name, link) {
       openPopupPicture.open(name, link);
     }},
-    {handleClikDelete: (idCard, element) => {
-      openPopupDelete.open(idCard, element);
+    {handleClikDelete: (idCard) => {
+      openPopupDelete.open(idCard,
+      {handleDeleteCard: (idCard) => {
+        apiCards
+        .removeTask(idCard)
+        .then(() => {
+          card.delCard();
+        })    
+        .catch(err=>console.log(err))
+      }});
     }},
     {handleClickLike: (onLike, idCard) => {
       if(!onLike) {

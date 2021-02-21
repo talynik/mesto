@@ -1,22 +1,21 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithOk extends Popup {
-  constructor(popupSelector, {handleDeleteCard}) {
+  constructor(popupSelector) {
     super(popupSelector);
-    this._handleDeleteCard = handleDeleteCard;
     this._buttonOk = document.querySelector(".popup__button_ok");
    }
 
-  open(idCard, element) {
+  open(idCard, {handleDeleteCard}) {
     super.open();
+    this._handleDeleteCard = handleDeleteCard;
     this._idCard = idCard;
-    this._element = element;
   }
 
-  setEventListeners(idCard) {
+  setEventListeners() {
     super.setEventListeners();
     this._buttonOk.addEventListener('click', () => {
-    this._handleDeleteCard(this._idCard, this._element);
+    this._handleDeleteCard(this._idCard);
     this.close();
     });
   }

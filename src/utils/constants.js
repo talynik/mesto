@@ -24,7 +24,3 @@ export const headers = {
     authorization: 'e2df783e-1573-46ac-9a48-a1dc05d4a045',
     'Content-Type': 'application/json'
 };
-
-//   https://1001puzzle.ru/upload/iblock/656/65681eeab856f92b586e8bc6c8ef6b3a.jpg
-
-//  https://i.stack.imgur.com/BdqMQ.jpg?s=328&g=1
