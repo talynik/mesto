@@ -2,14 +2,10 @@ export const profilePopupOpenButton = document.querySelector(".profile__edit-but
 export const addPlaceButton  = document.querySelector(".profile__add-button");
 export const profileNameInput = document.querySelector("#name");
 export const profileDescriptionInput = document.querySelector("#about");
-export const placePopupNameInput = document.querySelector("#name-mesto");
-export const placePopupLinkInput = document.querySelector("#url-mesto");
 export const elementsList = document.querySelector(".elements__list");
 export const popupImagePicture = document.querySelector(".popup__picture_image");
 export const popupNamePicture = document.querySelector(".popup__picture_name");
-export const avatar = document.querySelector('.profile__avatar');
 export const avatarPopupOpenButton = document.querySelector(".profile__edit-avatar");
-export const popupButton = document.querySelector(".popup__button");
 
 //конфигурационный объект валидации
 export const validation = {

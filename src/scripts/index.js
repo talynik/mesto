@@ -8,7 +8,6 @@ import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import {
   profilePopupOpenButton,
-  avatar,
   avatarPopupOpenButton,
   profileNameInput,
   profileDescriptionInput,
@@ -33,42 +32,30 @@ formAvatarValidator.enableValidation();
 
 const newUser = new UserInfo({
   name: ".profile__name",
-  about: ".profile__description"
+  about: ".profile__description",
+  avatar: ".profile__avatar"
 });
 
-const apiUser = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
-  headers
-});
-  
-const apiCards = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards',
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20',
   headers
 });
 
   //заполнение данных профиля с сервера
-apiUser
-  .getAllTasks()
+api
+  .getUserInfo()
   .then((data) => {
-    newUser.setUserInfo({
-      name: data.name,
-      about: data.about
-    })
-    avatar.src = data.avatar;
-    newUser.setUser(data);
+    newUser.setUserInfo(data)
   })
   .catch(err=>console.log(err));
 
   //изменение данных профиля
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData, button) {
-    apiUser
-      .editTask(formData)
+    api
+      .editUserInfo(formData)
       .then((data) => {
-        newUser.setUserInfo({
-          name: data.name,
-          about: data.about
-        })
+        newUser.setUserInfo(data)
       })
       .catch(err=>console.log(err))
       .finally(() => {
@@ -90,10 +77,10 @@ profilePopupOpenButton.addEventListener("click", function() {
   //изменение аватарки
 const avatarPopup = new PopupWithForm(".popup_avatar", {
   handleFormSubmit: function(ava, button) {
-    apiUser
+    api
       .editAvatar(ava)
       .then((data) => {
-        avatar.src = data.avatar;
+        newUser.setUserInfo(data)
       })
       .catch(err=>console.log(err))
       .finally(() => {
@@ -125,8 +112,8 @@ function newCard(item) {
     {handleClikDelete: (idCard) => {
       openPopupDelete.open(idCard,
       {handleDeleteCard: (idCard) => {
-        apiCards
-        .removeTask(idCard)
+        api
+        .removeCard(idCard)
         .then(() => {
           card.delCard();
         })    
@@ -135,14 +122,14 @@ function newCard(item) {
     }},
     {handleClickLike: (onLike, idCard) => {
       if(!onLike) {
-        apiCards
+        api
           .addLike(idCard)
           .then((data) => {
             card.getLike(data);
           })
           .catch(err=>console.log(err))
       } else {
-        apiCards
+        api
           .removeLike(idCard)
           .then((data) => {
             card.delLike(data);
@@ -160,8 +147,8 @@ const cardList = new Section((item) => {
 }, elementsList);
 
   //добавление карточек с сервера
-apiCards
-  .getAllTasks()
+api
+  .getCard()
   .then((data) => {
     cardList.renderItems(data);
   })    
@@ -171,8 +158,8 @@ apiCards
 const addCard = new PopupWithForm(".popup_mesto", {
   handleFormSubmit: function(formData, button) {
     renderLoading(true, addCard);
-    apiCards
-      .addTask(formData)
+    api
+      .addCard(formData)
       .then((data) => {
         cardList.addItem(newCard(data));
       })

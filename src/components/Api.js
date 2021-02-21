@@ -11,16 +11,18 @@ export default class Api{
     this._headers = config.headers;
   }
 
-  getAllTasks(){
-    return fetch(this._url, {
+    //загрузка информации о пользователе
+  getUserInfo(){
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: this._headers,
     })
     .then(onError)
   }
 
-  editTask(data){
-    return fetch(this._url, {
+    //изменение данных пользователя
+  editUserInfo(data){
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data)
@@ -28,8 +30,9 @@ export default class Api{
     .then(onError)
   }
 
+    //изменение аватарки
   editAvatar(data){
-    return fetch(`${this._url}/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({avatar: data.avatar})
@@ -37,55 +40,48 @@ export default class Api{
     .then(onError)
   }
 
-  //добавить лайк
+    //удаление карточки
+  removeCard(id){
+    return fetch(`${this._url}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(onError)
+  }
+
+    //добавить лайк
   addLike(id){
-    return fetch(`${this._url}/likes/${id}`, {
+    return fetch(`${this._url}/cards/likes/${id}`, {
       method: 'PUT',
       headers: this._headers,
     })
     .then(onError)
   }
 
-  //удалить лайк
+    //удалить лайк
   removeLike(id){
-    return fetch(`${this._url}/likes/${id}`, {
-      method: "DELETE",
-      headers: this._headers,
-    })
-    .then(onError)
-  }
-  
-  addTask(data){
-    return fetch(this._url, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(data)
-    })
-    .then(onError)
-  }
-
-  removeTask(id){
-    return fetch(`${this._url}/${id}`, {
+    return fetch(`${this._url}/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
     })
     .then(onError)
   }
 
-    //запрос информации о карте
-  getLike(id){
-    return fetch(`${this._url}/${id}`, {
+    //загрузка карточек с сервера
+  getCard(){
+    return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers,
     })
     .then(onError)
   }
 
-  editLike(id, editLike){
-    return fetch(`${this._url}${id}`, {
-      method: 'PATCH',
+    //добавление новой карточки
+  addCard(data){
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(editLike)
+      body: JSON.stringify(data)
     })
     .then(onError)
   }
