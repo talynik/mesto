@@ -19,16 +19,16 @@ export default class Card {
   }
 
   //функция установки лайка
-  getLike() {
+  getLike(item) {
     this._like.classList.add('element__like_active');
-    this._numberLike.textContent = this._fanat + 1;
+    this._numberLike.textContent = item.likes.length;
     this._likeActiv = !this._likeActiv;
   }
 
   //функция удаления лайка
-  delLike() {
+  delLike(item) {
     this._like.classList.remove('element__like_active');
-    this._numberLike.textContent = this._fanat - 1;
+    this._numberLike.textContent = item.likes.length;
     this._likeActiv = !this._likeActiv;
   }
 
@@ -65,13 +65,6 @@ export default class Card {
   
     return this._card;
   }
-  
-    //удаление карточки
-  deleteCard() {
-    this._card.remove();
-    this._card = null;
-  }
-
  
 _likeEventListener() {
   this._like.addEventListener('click', () => {
@@ -81,7 +74,7 @@ _likeEventListener() {
 
 _deleteEventListener() {
   this._deleteButton.addEventListener('click', () => {
-    this._handleClikDelete(this._id);
+    this._handleClikDelete(this._id, this._card);
   });
 }
 
