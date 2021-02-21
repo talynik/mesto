@@ -50,6 +50,7 @@ const apiCards = new Api({
 apiUser
   .getAllTasks()
   .then((data) => {
+    console.log(data)
     newUser.setUserInfo({
       name: data.name,
       about: data.about
@@ -62,6 +63,7 @@ apiUser
   //изменение данных профиля
 const profile = new PopupWithForm(".popup_profile", {
   handleFormSubmit: function(formData, button) {
+    console.log(formData)
     apiUser
       .editTask(formData)
       .then((data) => {
@@ -90,9 +92,11 @@ profilePopupOpenButton.addEventListener("click", function() {
   //изменение аватарки
 const avatarPopup = new PopupWithForm(".popup_avatar", {
   handleFormSubmit: function(ava, button) {
+    console.log(ava)
     apiUser
-      .editTask(ava)
+      .editAvatar(ava)
       .then((data) => {
+        console.log(data)
         avatar.src = data.avatar;
       })
       .catch(err=>console.log(err))
@@ -134,6 +138,25 @@ function newCard(item) {
     {handleClikDelete: (idCard) => {
       openPopupDelete.open();
       openPopupDelete.setEventListeners(idCard);
+    }},
+    {handleClickLike: (editLike, idCard) => {
+      console.log(idCard);
+      console.log(editLike);
+      //изменение количества лайков
+      apiCards
+        .getLike(idCard)
+        .then((data) => {
+          console.log(data);
+          console.log(dala.like.lenght)
+          /* fanat = data.likes.length;
+          fanat += editLike;
+        })
+        .editLike(id, data.fanat)
+        .then(
+
+        ) */
+        })
+        .catch(err=>console.log(err))
     }}
   );
   const cardElement = card.generateCard();
@@ -148,6 +171,7 @@ const cardList = new Section((item) => {
 apiCards
   .getAllTasks()
   .then((data) => {
+    console.log(data);
     cardList.renderItems(data);
   })    
   .catch(err=>console.log(err))
