@@ -14,7 +14,7 @@ export default class Card {
    }
 
   _getTemplate() {
-    const elementMesto = document.querySelector(this._templateCard).cloneNode(true).content;
+    const elementMesto = document.querySelector(this._templateCard).content.querySelector('.element').cloneNode(true);
     return elementMesto;
   }
 
@@ -32,6 +32,7 @@ export default class Card {
     this._likeActiv = !this._likeActiv;
   }
 
+    //удаление карточки
   delCard() {
     this._card.remove();
   }
